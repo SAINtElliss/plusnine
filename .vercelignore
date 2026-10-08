@@ -1,0 +1,11 @@
+# Ignore 362MB master video in root directory (we use optimized streams in public/videos/)
+PlusNine 2026 (2025 Comp)_Re.mp4
+*.mp4
+!public/videos/*.mp4
+
+# Ignore local dependencies and caches
+node_modules
+.git
+.agents
+.gemini
+project_history.md
