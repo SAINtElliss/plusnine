@@ -6755,22 +6755,26 @@ img, video {
 }
 
 .fest-editorial-btn--primary {
-  background: var(--color-black);
-  border: 1.5px solid var(--color-black);
-  color: var(--color-orange);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16);
+  background: var(--color-orange);
+  border: 1.5px solid var(--color-orange);
+  color: #ffffff;
+  box-shadow: 0 2px 12px rgba(255, 59, 22, 0.28);
 }
 
 .fest-editorial-btn--primary svg {
-  color: var(--color-orange);
+  color: #ffffff;
 }
 
 .fest-editorial-btn--primary:hover {
-  background: #181818;
-  border-color: var(--color-orange);
-  color: var(--color-orange);
+  background: #e03210;
+  border-color: #e03210;
+  color: #ffffff;
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28), 0 0 12px rgba(255, 59, 22, 0.2);
+  box-shadow: 0 4px 16px rgba(255, 59, 22, 0.42);
+}
+
+.fest-editorial-btn--primary:hover svg {
+  color: #ffffff;
 }
 
 /* ==========================================================================
@@ -6937,15 +6941,15 @@ img, video {
 @keyframes floatRoadmapPulse {
   0%, 72%, 100% {
     transform: translate(-50%, 0) scale(1);
-    box-shadow: 0 8px 26px rgba(255, 59, 22, 0.42), 0 2px 8px rgba(0, 0, 0, 0.28);
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.5), 0 0 16px rgba(255, 59, 22, 0.25);
   }
   80% {
     transform: translate(-50%, 0) scale(1.045);
-    box-shadow: 0 12px 34px rgba(255, 59, 22, 0.68), 0 0 0 4px rgba(255, 59, 22, 0.22);
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.7), 0 0 24px rgba(255, 59, 22, 0.45), 0 0 0 4px rgba(255, 59, 22, 0.18);
   }
   88% {
     transform: translate(-50%, 0) scale(1.01);
-    box-shadow: 0 9px 28px rgba(255, 59, 22, 0.48), 0 2px 8px rgba(0, 0, 0, 0.28);
+    box-shadow: 0 9px 28px rgba(0, 0, 0, 0.55), 0 0 18px rgba(255, 59, 22, 0.3);
   }
 }
 
@@ -6959,9 +6963,9 @@ img, video {
   align-items: center;
   gap: 9px;
   padding: 13px 28px;
-  background: var(--color-orange);
-  color: #ffffff;
-  border: none;
+  background: var(--color-black);
+  color: var(--color-orange);
+  border: 1.5px solid var(--color-black);
   border-radius: 999px;
   font-family: var(--font-display);
   font-size: 0.82rem;
@@ -6970,15 +6974,17 @@ img, video {
   text-transform: uppercase;
   cursor: pointer;
   user-select: none;
-  box-shadow: 0 8px 26px rgba(255, 59, 22, 0.42), 0 2px 8px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.5), 0 0 16px rgba(255, 59, 22, 0.25);
   animation: floatRoadmapEnter 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards, floatRoadmapPulse 4.5s cubic-bezier(0.16, 1, 0.3, 1) 1.2s infinite;
-  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, box-shadow 0.2s ease, visibility 0.35s;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, visibility 0.35s;
 }
 
 .fest-floating-roadmap-btn:hover {
-  background: #ff4d29;
+  background: #181818;
+  color: var(--color-orange);
+  border-color: var(--color-orange);
   transform: translate(-50%, -2px) scale(1.025);
-  box-shadow: 0 12px 36px rgba(255, 59, 22, 0.58), 0 4px 12px rgba(0, 0, 0, 0.32);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65), 0 0 22px rgba(255, 59, 22, 0.4);
 }
 
 .fest-floating-roadmap-btn:hover .fest-floating-roadmap-btn__icon {
@@ -6995,6 +7001,7 @@ img, video {
 }
 
 .fest-floating-roadmap-btn__icon {
+  color: var(--color-orange);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
