@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUpRight, Calendar, MapPin, Ticket } from 'lucide-react';
+import { ArrowUpRight, Calendar, Film, MapPin, Ticket } from 'lucide-react';
 import { PageType } from '../../data/projects';
 
 interface EventsPageProps {
@@ -130,6 +130,16 @@ export const EventsPage: React.FC<EventsPageProps> = ({ onNavigate }) => {
                   <span>{FEATURED_EVENT.ctaText}</span>
                   <ArrowUpRight size={14} />
                 </button>
+                <a
+                  href="/film-submission"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="events-btn-submission"
+                >
+                  <Film size={15} />
+                  <span>Film Submission</span>
+                  <ArrowUpRight size={13} />
+                </a>
               </div>
             </div>
           </div>

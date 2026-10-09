@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowDown, Calendar, MapPin, Ticket } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Calendar, Film, MapPin, Ticket } from 'lucide-react';
 import { PageType } from '../../data/projects';
 import { FestivalRoadmap } from '../filmfest/FestivalRoadmap';
 import { useEventbriteModal, initEventbriteModalTrigger, isEventbriteInitialized } from '../../utils/eventbrite';
@@ -100,6 +100,16 @@ export const FilmFestPage: React.FC<FilmFestPageProps> = ({ onNavigate: _onNavig
                     <Ticket size={14} />
                     <span>Reserve Free Pass</span>
                   </button>
+                  <a
+                    href="/film-submission"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="fest-editorial-btn fest-editorial-btn--outline"
+                  >
+                    <Film size={13} />
+                    <span>Submit Your Film</span>
+                    <ArrowUpRight size={12} />
+                  </a>
                 </div>
               </div>
             </div>

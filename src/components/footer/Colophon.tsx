@@ -116,6 +116,16 @@ export const Colophon: React.FC<ColophonProps> = ({ onNavigate }) => {
                   Film Fest &rsquo;26 &bull;
                 </a>
               </li>
+              <li>
+                <a
+                  href="/film-submission"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: 'var(--color-orange)' }}
+                >
+                  Film Submission &bull;
+                </a>
+              </li>
             </ul>
           </div>
 

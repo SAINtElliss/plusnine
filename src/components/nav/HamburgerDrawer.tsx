@@ -152,6 +152,17 @@ export const HamburgerDrawer: React.FC<HamburgerDrawerProps> = ({
               </button>
             );
           })}
+          <a
+            href="/film-submission"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mobile-drawer-nav-item mobile-drawer-nav-item--submission"
+          >
+            <span className="mobile-drawer-nav-item__label">FILM SUBMISSION</span>
+            <span className="mobile-drawer-nav-item__mag-indicator" aria-hidden="true">
+              <ArrowUpRight size={15} />
+            </span>
+          </a>
         </nav>
 
         {/* Clutter-Free Refined Footer */}

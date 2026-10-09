@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, ArrowUpRight, Mail } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Film, Mail } from 'lucide-react';
 import { PageType } from '../../data/projects';
 import { PLUSNINE_MEMBERS, Member } from '../../data/members';
 
@@ -316,14 +316,26 @@ export const PeoplePage: React.FC<PeoplePageProps> = ({ onNavigate: _onNavigate 
                   PlusNine collaborates with independent directors, photographers, musicians, and writers on co-productions, treatments, and distribution.
                 </p>
               </div>
-              <a
-                href="mailto:plus9ineent@gmail.com"
-                className="people-join-btn"
-              >
-                <Mail size={16} />
-                <span>Submit Treatment</span>
-                <ArrowUpRight size={14} />
-              </a>
+              <div className="people-join-actions">
+                <a
+                  href="/film-submission"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="people-join-btn"
+                >
+                  <Film size={16} />
+                  <span>Submit Film</span>
+                  <ArrowUpRight size={14} />
+                </a>
+                <a
+                  href="mailto:plus9ineent@gmail.com"
+                  className="people-join-btn people-join-btn--secondary"
+                >
+                  <Mail size={16} />
+                  <span>Submit Treatment</span>
+                  <ArrowUpRight size={14} />
+                </a>
+              </div>
             </div>
           </div>
         </section>

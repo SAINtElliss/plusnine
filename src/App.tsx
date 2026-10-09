@@ -27,6 +27,10 @@ export const App: React.FC = () => {
   useEffect(() => {
     const parseHash = (): PageType => {
       const hash = window.location.hash.toLowerCase().replace('#/', '').replace('#', '');
+      if (hash.startsWith('film-submission')) {
+        window.location.href = '/film-submission';
+        return 'home';
+      }
       if (hash.startsWith('as-we-are')) return 'as-we-are';
       if (hash.startsWith('work')) return 'work';
       if (hash.startsWith('events')) return 'events';

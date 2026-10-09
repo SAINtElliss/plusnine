@@ -7260,3 +7260,51 @@ iframe[id^="eventbrite-widget-modal"] {
   }
 }
 
+/* ==========================================================================
+   FILM SUBMISSION BUTTONS & ACTIONS
+   ========================================================================== */
+.events-btn-submission {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 24px;
+  background: transparent;
+  color: #ffffff;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-snappy);
+}
+
+.events-btn-submission:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #ffffff;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.people-join-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.people-join-btn--secondary {
+  background: transparent !important;
+  color: #ffffff !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+}
+
+.people-join-btn--secondary:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+

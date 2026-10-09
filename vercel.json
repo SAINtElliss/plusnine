@@ -2,6 +2,18 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/film-submission",
+      "destination": "https://submit.plusnine.org",
+      "permanent": true
+    },
+    {
+      "source": "/film-submission/",
+      "destination": "https://submit.plusnine.org",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
