@@ -1,7 +1,75 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowUpRight, Film, Mail } from 'lucide-react';
+import { ArrowUpRight, Film, Mail, Instagram, Linkedin, Globe } from 'lucide-react';
 import { PageType } from '../../data/projects';
 import { PLUSNINE_MEMBERS, Member } from '../../data/members';
+
+const TikTokIcon: React.FC<{ size?: number; strokeWidth?: number; className?: string }> = ({
+  size = 18,
+  strokeWidth = 1.8,
+  className = ''
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={strokeWidth}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M21 7.917v4.034a9.948 9.948 0 0 1-5-1.951v4.5a6.5 6.5 0 1 1-8-6.326v4.326a2.5 2.5 0 1 0 4 2v-11.5h4.083a6.002 6.002 0 0 0 4.917 4.917z" />
+  </svg>
+);
+
+const getMemberSocialItems = (member: Member) => {
+  // Ordered platforms: Instagram → TikTok → LinkedIn → Personal Website
+  const ALL_PLATFORMS = [
+    {
+      id: 'instagram' as const,
+      name: 'Instagram',
+      icon: <Instagram size={18} strokeWidth={1.8} aria-hidden="true" />
+    },
+    {
+      id: 'tiktok' as const,
+      name: 'TikTok',
+      icon: <TikTokIcon size={18} strokeWidth={1.8} />
+    },
+    {
+      id: 'linkedin' as const,
+      name: 'LinkedIn',
+      icon: <Linkedin size={18} strokeWidth={1.8} aria-hidden="true" />
+    },
+    {
+      id: 'website' as const,
+      name: 'Personal Website',
+      icon: <Globe size={18} strokeWidth={1.8} aria-hidden="true" />
+    }
+  ];
+
+  if (member.socials !== undefined) {
+    return ALL_PLATFORMS
+      .filter((p) => member.socials![p.id] !== undefined && member.socials![p.id] !== null)
+      .map((p) => {
+        const val = member.socials![p.id];
+        const isUrl = typeof val === 'string' && (val.startsWith('http://') || val.startsWith('https://') || val.startsWith('/'));
+        return {
+          ...p,
+          url: isUrl ? val : undefined,
+          isPlaceholder: !isUrl
+        };
+      });
+  }
+
+  // Default: All 4 platforms as placeholders (placeholder icons do not navigate)
+  return ALL_PLATFORMS.map((p) => ({
+    ...p,
+    url: undefined,
+    isPlaceholder: true
+  }));
+};
 
 interface PeoplePageProps {
   onNavigate: (page: PageType) => void;
@@ -236,6 +304,44 @@ export const PeoplePage: React.FC<PeoplePageProps> = ({ onNavigate: _onNavigate 
                   </div>
                 )}
 
+                {/* Social Links Section (Instagram → TikTok → LinkedIn → Personal Website) */}
+                {(() => {
+                  const socialItems = getMemberSocialItems(selectedMember);
+                  if (socialItems.length === 0) return null;
+                  return (
+                    <div className="people-profile-field-block people-profile-socials-block">
+                      <span className="people-profile-field-label">Social Links</span>
+                      <div className="people-profile-socials-row" role="list" aria-label={`${selectedMember.name} social links`}>
+                        {socialItems.map((item) =>
+                          item.isPlaceholder ? (
+                            <button
+                              key={item.id}
+                              type="button"
+                              className="people-social-btn people-social-btn--placeholder"
+                              aria-label={item.name}
+                              onClick={(e) => e.preventDefault()}
+                            >
+                              {item.icon}
+                              <span className="people-social-tooltip">{item.name}</span>
+                            </button>
+                          ) : (
+                            <a
+                              key={item.id}
+                              href={item.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="people-social-btn"
+                              aria-label={item.name}
+                            >
+                              {item.icon}
+                              <span className="people-social-tooltip">{item.name}</span>
+                            </a>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  );
+                })()}
 
               </div>
             </div>

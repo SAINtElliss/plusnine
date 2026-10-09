@@ -2,6 +2,24 @@
 
 ## Session Log
 
+### 2026-10-09 — Individual Member Profile Social Links Section
+- **Configurable Member Socials Schema (`src/data/members.ts`)**:
+  - Added `MemberSocials` interface (`instagram`, `tiktok`, `linkedin`, `website`) and optional `socials?: MemberSocials` field to `Member`.
+  - Configurable per member: platforms with valid URLs open in new tabs; platforms omitted or set to `undefined`/`null` when a custom `socials` object is supplied are automatically hidden; default fallback renders all four platforms in placeholder mode.
+- **Ordered Social Links Row (`src/components/pages/PeoplePage.tsx`)**:
+  - Implemented exact sequence: **Instagram → TikTok → LinkedIn → Personal Website**.
+  - Consistent SVG icons: Lucide `Instagram`, `Linkedin`, `Globe` alongside custom Lucide-styled stroked `TikTokIcon` (`viewBox="0 0 24 24"`, `strokeWidth={1.8}`).
+  - Placeholder icons are non-navigating (`button` element with `e.preventDefault()`, zero dummy URL redirection).
+- **Editorial Micro-Interactions & Styling (`src/styles/main.css`)**:
+  - Monochrome near-black (`#080808`) circular icon buttons with subtle borders (`rgba(8, 8, 8, 0.14)`).
+  - Signal orange (`#ff3b16`) accents on hover and focus with `-2px` lift and glow shadow.
+  - Floating editorial tooltips (`.people-social-tooltip`) reveal platform names ("Instagram", "TikTok", "LinkedIn", "Personal Website") only on hover or focus; platform names remain hidden by default.
+- **Verification & Deployment**:
+  - `npm run typecheck` passed (0 errors).
+  - `npm run build` passed (all static routes pre-rendered).
+  - Automated Chrome DevTools Protocol verified button tags, SVG rendering, zero navigation on click, default hidden tooltips, and orange color shift on hover/focus.
+  - Deployed live to Vercel production: https://plusnine.vercel.app.
+
 ### 2026-10-09 — Light Color Theme Update Across All Pages (Pure White `#FFFFFF`)
 - **Tokens Update (`src/styles/tokens.css`)**:
   - Replaced cream/off-white background tokens `--color-paper: #f1f0eb;` and `--paper-bg: #f1f0eb;` with **pure white (`#ffffff`)**.

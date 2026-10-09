@@ -27,6 +27,13 @@ export interface MemberLink {
   type?: 'social' | 'portfolio' | 'streaming' | 'store' | 'other';
 }
 
+export interface MemberSocials {
+  instagram?: string;
+  tiktok?: string;
+  linkedin?: string;
+  website?: string;
+}
+
 export interface Member {
   id: string;
   name: string;
@@ -40,6 +47,7 @@ export interface Member {
   projects?: MemberProject[];
   externalLinks?: MemberLink[];
   bio?: string;
+  socials?: MemberSocials;
 }
 
 export const PLUSNINE_MEMBERS: Member[] = [
