@@ -21,8 +21,7 @@ export interface FeaturedNavEvent {
 export const FEATURED_NAV_EVENT: FeaturedNavEvent = {
   page: 'film-fest',
   title: '4K FILM FEST',
-  metadata: 'NOV 12, 2026',
-  arrow: '↗'
+  metadata: 'NOV 12, 2026'
 };
 
 export const FloatingDock: React.FC<FloatingDockProps> = ({
@@ -121,11 +120,16 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({
               className={`floating-dock-pill__featured ${
                 currentPage === FEATURED_NAV_EVENT.page ? 'is-active' : ''
               }`}
-              aria-label={`${FEATURED_NAV_EVENT.title} ${FEATURED_NAV_EVENT.arrow} ${FEATURED_NAV_EVENT.metadata}`}
+              aria-label={`${FEATURED_NAV_EVENT.title} — ${FEATURED_NAV_EVENT.metadata}`}
             >
               <span className="floating-dock-pill__featured-title">
-                {FEATURED_NAV_EVENT.title}
-                <span className="floating-dock-pill__featured-arrow">{FEATURED_NAV_EVENT.arrow}</span>
+                <span>{FEATURED_NAV_EVENT.title}</span>
+                <ArrowUpRight
+                  size={11}
+                  strokeWidth={2.5}
+                  className="floating-dock-pill__featured-arrow"
+                  aria-hidden="true"
+                />
               </span>
               <span className="floating-dock-pill__featured-meta">
                 {FEATURED_NAV_EVENT.metadata}

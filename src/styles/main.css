@@ -3397,10 +3397,12 @@ img, video {
 }
 
 .floating-dock-pill__featured-arrow {
-  font-size: 0.74rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   line-height: 1;
-  display: inline-block;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .floating-dock-pill__featured-meta {

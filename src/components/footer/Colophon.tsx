@@ -183,7 +183,7 @@ export const Colophon: React.FC<ColophonProps> = ({ onNavigate }) => {
         {/* Bottom Colophon Bar */}
         <div className="footer-copyright-bar">
           <div className="footer-copy-text">
-            PlusNine &copy; {new Date().getFullYear()} &middot; All Rights Reserved
+            PlusNine &copy;&#xFE0E; {new Date().getFullYear()} &middot; All Rights Reserved
           </div>
           <div className="footer-copy-text">
             Independent Moving Image Culture &middot; Edmonton / Worldwide
