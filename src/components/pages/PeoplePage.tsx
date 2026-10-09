@@ -10,31 +10,48 @@ interface PeoplePageProps {
 export const PeoplePage: React.FC<PeoplePageProps> = ({ onNavigate: _onNavigate }) => {
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
 
-  // Synchronize deep-linking with URL hash (e.g., #/people/oliseh)
+  // Synchronize deep-linking with clean URL pathnames (e.g., /people/oliseh)
   useEffect(() => {
-    const handleHash = () => {
+    const handleLocationSync = () => {
+      // 1. Check clean pathname (/people/:id)
+      const pathname = window.location.pathname.toLowerCase();
+      if (pathname.startsWith('/people/')) {
+        const id = pathname.replace(/^\/people\//, '').split('/')[0].split('?')[0].trim();
+        const found = PLUSNINE_MEMBERS.find((m) => m.id === id);
+        if (found) {
+          setSelectedMember(found);
+          return;
+        }
+      } else if (pathname === '/people') {
+        setSelectedMember(null);
+        return;
+      }
+
+      // 2. Backwards-compatible legacy hash auto-migration (#/people/:id)
       const hash = window.location.hash.toLowerCase();
       if (hash.startsWith('#/people/') || hash.startsWith('#people/')) {
         const id = hash.replace(/^#\/?people\//, '').split('?')[0].trim();
         const found = PLUSNINE_MEMBERS.find((m) => m.id === id);
         if (found) {
           setSelectedMember(found);
+          window.history.replaceState(null, '', `/people/${id}`);
           return;
         }
       }
       if (hash === '#/people' || hash === '#people') {
         setSelectedMember(null);
+        window.history.replaceState(null, '', '/people');
       }
     };
 
-    handleHash();
-    window.addEventListener('hashchange', handleHash);
-    return () => window.removeEventListener('hashchange', handleHash);
+    handleLocationSync();
+    window.addEventListener('popstate', handleLocationSync);
+    return () => window.removeEventListener('popstate', handleLocationSync);
   }, []);
 
   const handleSelectMember = (member: Member) => {
     setSelectedMember(member);
-    window.location.hash = `#/people/${member.id}`;
+    window.history.pushState(null, '', `/people/${member.id}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 

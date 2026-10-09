@@ -12,7 +12,8 @@ export const RecentlySection: React.FC<RecentlySectionProps> = ({ onNavigate }) 
     if (onNavigate) {
       onNavigate('as-we-are');
     } else {
-      window.location.hash = '/as-we-are';
+      window.history.pushState(null, '', '/as-we-are');
+      window.dispatchEvent(new PopStateEvent('popstate'));
     }
   };
 
@@ -72,7 +73,7 @@ export const RecentlySection: React.FC<RecentlySectionProps> = ({ onNavigate }) 
 
             <div className="magazine-spread__action-row">
               <a
-                href="#/as-we-are"
+                href="/as-we-are"
                 onClick={handleEnterStory}
                 className="magazine-spread__enter-link"
               >

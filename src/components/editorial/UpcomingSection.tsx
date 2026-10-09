@@ -28,7 +28,7 @@ const EVENTS_DATA: EventRow[] = [
     venue: 'The Roxy Theatre',
     city: 'Edmonton, AB',
     status: 'upcoming',
-    link: '#/film-fest'
+    link: '/film-fest'
   },
   {
     id: 'as-we-are-launch',
@@ -39,7 +39,7 @@ const EVENTS_DATA: EventRow[] = [
     venue: 'Digital Release',
     city: 'Online',
     status: 'recent',
-    link: '#/as-we-are'
+    link: '/as-we-are'
   }
 ];
 
@@ -51,13 +51,22 @@ export const UpcomingSection: React.FC<UpcomingSectionProps> = ({ onNavigate }) 
   const handleRowClick = (event: EventRow) => {
     if (event.id === 'film-fest-2026') {
       if (onNavigate) onNavigate('film-fest');
-      else window.location.hash = '/film-fest';
+      else {
+        window.history.pushState(null, '', '/film-fest');
+        window.dispatchEvent(new PopStateEvent('popstate'));
+      }
     } else if (event.id === 'vernacular-launch' || event.id === 'as-we-are-launch') {
       if (onNavigate) onNavigate('as-we-are');
-      else window.location.hash = '/as-we-are';
+      else {
+        window.history.pushState(null, '', '/as-we-are');
+        window.dispatchEvent(new PopStateEvent('popstate'));
+      }
     } else {
       if (onNavigate) onNavigate('events');
-      else window.location.hash = '/events';
+      else {
+        window.history.pushState(null, '', '/events');
+        window.dispatchEvent(new PopStateEvent('popstate'));
+      }
     }
   };
 
@@ -139,7 +148,10 @@ export const UpcomingSection: React.FC<UpcomingSectionProps> = ({ onNavigate }) 
             type="button"
             onClick={() => {
               if (onNavigate) onNavigate('events');
-              else window.location.hash = '/events';
+              else {
+                window.history.pushState(null, '', '/events');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }
             }}
             className="upcoming-calendar-link"
           >

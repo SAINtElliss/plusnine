@@ -49,7 +49,9 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({
       return;
     }
     if (action.targetPage) {
-      window.location.hash = `/${action.targetPage}`;
+      const nextPath = action.targetPage === 'home' ? '/' : `/${action.targetPage}`;
+      window.history.pushState(null, '', nextPath);
+      window.dispatchEvent(new PopStateEvent('popstate'));
       return;
     }
     if (action.anchorId) {

@@ -84,12 +84,18 @@ export const ExpandableSearch: React.FC<ExpandableSearchProps> = ({
         onSelect: () => {
           if (project.id === 'as-we-are') {
             if (onNavigate) onNavigate('as-we-are');
-            else window.location.hash = '#/as-we-are';
+            else {
+              window.history.pushState(null, '', '/as-we-are');
+              window.dispatchEvent(new PopStateEvent('popstate'));
+            }
           } else if (onSelectProject) {
             onSelectProject(project);
           } else {
             if (onNavigate) onNavigate('work');
-            else window.location.hash = '#/work';
+            else {
+              window.history.pushState(null, '', '/work');
+              window.dispatchEvent(new PopStateEvent('popstate'));
+            }
           }
         }
       });
@@ -121,7 +127,10 @@ export const ExpandableSearch: React.FC<ExpandableSearchProps> = ({
       ],
       onSelect: () => {
         if (onNavigate) onNavigate('film-fest');
-        else window.location.hash = '#/film-fest';
+        else {
+          window.history.pushState(null, '', '/film-fest');
+          window.dispatchEvent(new PopStateEvent('popstate'));
+        }
       }
     });
 
@@ -145,7 +154,10 @@ export const ExpandableSearch: React.FC<ExpandableSearchProps> = ({
       ],
       onSelect: () => {
         if (onNavigate) onNavigate('as-we-are');
-        else window.location.hash = '#/as-we-are';
+        else {
+          window.history.pushState(null, '', '/as-we-are');
+          window.dispatchEvent(new PopStateEvent('popstate'));
+        }
       }
     });
 
@@ -168,8 +180,9 @@ export const ExpandableSearch: React.FC<ExpandableSearchProps> = ({
           member.bio || ''
         ],
         onSelect: () => {
-          window.location.hash = `#/people/${member.id}`;
+          window.history.pushState(null, '', `/people/${member.id}`);
           if (onNavigate) onNavigate('people');
+          window.dispatchEvent(new PopStateEvent('popstate'));
         }
       });
     });
@@ -195,7 +208,10 @@ export const ExpandableSearch: React.FC<ExpandableSearchProps> = ({
       ],
       onSelect: () => {
         if (onNavigate) onNavigate('about');
-        else window.location.hash = '#/about';
+        else {
+          window.history.pushState(null, '', '/about');
+          window.dispatchEvent(new PopStateEvent('popstate'));
+        }
       }
     });
 
@@ -218,7 +234,10 @@ export const ExpandableSearch: React.FC<ExpandableSearchProps> = ({
       ],
       onSelect: () => {
         if (onNavigate) onNavigate('work');
-        else window.location.hash = '#/work';
+        else {
+          window.history.pushState(null, '', '/work');
+          window.dispatchEvent(new PopStateEvent('popstate'));
+        }
       }
     });
 
@@ -240,7 +259,10 @@ export const ExpandableSearch: React.FC<ExpandableSearchProps> = ({
       ],
       onSelect: () => {
         if (onNavigate) onNavigate('events');
-        else window.location.hash = '#/events';
+        else {
+          window.history.pushState(null, '', '/events');
+          window.dispatchEvent(new PopStateEvent('popstate'));
+        }
       }
     });
 
@@ -261,7 +283,10 @@ export const ExpandableSearch: React.FC<ExpandableSearchProps> = ({
       ],
       onSelect: () => {
         if (onNavigate) onNavigate('people');
-        else window.location.hash = '#/people';
+        else {
+          window.history.pushState(null, '', '/people');
+          window.dispatchEvent(new PopStateEvent('popstate'));
+        }
       }
     });
 
@@ -282,7 +307,10 @@ export const ExpandableSearch: React.FC<ExpandableSearchProps> = ({
       ],
       onSelect: () => {
         if (onNavigate) onNavigate('film-fest');
-        else window.location.hash = '#/film-fest';
+        else {
+          window.history.pushState(null, '', '/film-fest');
+          window.dispatchEvent(new PopStateEvent('popstate'));
+        }
       }
     });
 

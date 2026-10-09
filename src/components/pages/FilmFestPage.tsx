@@ -108,8 +108,8 @@ export const FilmFestPage: React.FC<FilmFestPageProps> = ({ onNavigate: _onNavig
   const handleExitAdminPreview = () => {
     try {
       sessionStorage.removeItem(ADMIN_STORAGE_KEY);
-      if (window.location.hash.includes('?')) {
-        window.location.hash = window.location.hash.split('?')[0];
+      if (window.location.search || window.location.hash.includes('?')) {
+        window.history.replaceState(null, '', window.location.pathname);
       }
     } catch {}
     setIsAdminPreview(false);

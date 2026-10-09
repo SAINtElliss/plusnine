@@ -32,7 +32,9 @@ export const Colophon: React.FC<ColophonProps> = ({ onNavigate }) => {
     if (onNavigate) {
       onNavigate(page);
     } else {
-      window.location.hash = `/${page === 'home' ? '' : page}`;
+      const nextPath = page === 'home' ? '/' : `/${page}`;
+      window.history.pushState(null, '', nextPath);
+      window.dispatchEvent(new PopStateEvent('popstate'));
     }
   };
 
@@ -75,7 +77,7 @@ export const Colophon: React.FC<ColophonProps> = ({ onNavigate }) => {
           {/* Col 1: Brand Emblem & Tagline */}
           <div className="footer-min-col footer-min-col--brand">
             <a
-              href="#/"
+              href="/"
               onClick={(e) => handleLinkClick('home', e)}
               className="footer-brand-logo-link"
               aria-label="PlusNine Home"
@@ -96,20 +98,20 @@ export const Colophon: React.FC<ColophonProps> = ({ onNavigate }) => {
             <div className="footer-min-heading">INDEX</div>
             <ul className="footer-min-nav">
               <li>
-                <a href="#/work" onClick={(e) => handleLinkClick('work', e)}>Work</a>
+                <a href="/work" onClick={(e) => handleLinkClick('work', e)}>Work</a>
               </li>
               <li>
-                <a href="#/events" onClick={(e) => handleLinkClick('events', e)}>Events</a>
+                <a href="/events" onClick={(e) => handleLinkClick('events', e)}>Events</a>
               </li>
               <li>
-                <a href="#/people" onClick={(e) => handleLinkClick('people', e)}>People</a>
+                <a href="/people" onClick={(e) => handleLinkClick('people', e)}>People</a>
               </li>
               <li>
-                <a href="#/about" onClick={(e) => handleLinkClick('about', e)}>About</a>
+                <a href="/about" onClick={(e) => handleLinkClick('about', e)}>About</a>
               </li>
               <li>
                 <a
-                  href="#/film-fest"
+                  href="/film-fest"
                   onClick={(e) => handleLinkClick('film-fest', e)}
                   style={{ color: 'var(--color-orange)' }}
                 >

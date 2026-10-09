@@ -23,39 +23,70 @@ export const App: React.FC = () => {
   const [showreelStartTime, setShowreelStartTime] = useState(0);
   const transitionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Synchronize with URL hash routing & direct pathnames
+  // Synchronize with clean URL path-based routing & handle legacy hash auto-migration
   useEffect(() => {
-    const parseHash = (): PageType => {
-      const path = window.location.pathname.toLowerCase().replace(/^\//, '');
-      const hash = window.location.hash.toLowerCase().replace('#/', '').replace('#', '');
+    const parseRoute = (): PageType => {
+      let pathname = window.location.pathname.toLowerCase().replace(/\/+$/, '') || '/';
+      const rawHash = window.location.hash.toLowerCase();
 
-      if (path.startsWith('film-submission') || hash.startsWith('film-submission')) {
+      // Check for legacy hash routes (e.g., /#/people, #/work, /film-fest#/people)
+      // Exclude intentional in-page anchors like #roadmap
+      if (rawHash && !rawHash.startsWith('#roadmap')) {
+        const hashTarget = rawHash.replace(/^#\/?/, '');
+        if (
+          hashTarget.startsWith('work') ||
+          hashTarget.startsWith('events') ||
+          hashTarget.startsWith('people') ||
+          hashTarget.startsWith('about') ||
+          hashTarget.startsWith('film-fest') ||
+          hashTarget.startsWith('as-we-are') ||
+          hashTarget.startsWith('film-submission')
+        ) {
+          const cleanPath = `/${hashTarget}`;
+          window.history.replaceState(null, '', cleanPath);
+          pathname = cleanPath;
+        }
+      }
+
+      const path = pathname.replace(/^\//, '');
+
+      if (path.startsWith('film-submission')) {
         window.location.href = '/film-submission';
         return 'home';
       }
-      if (path.startsWith('film-fest') || hash.startsWith('film-fest')) return 'film-fest';
-      if (path.startsWith('as-we-are') || hash.startsWith('as-we-are')) return 'as-we-are';
-      if (path.startsWith('work') || hash.startsWith('work')) return 'work';
-      if (path.startsWith('events') || hash.startsWith('events')) return 'events';
-      if (path.startsWith('people') || hash.startsWith('people')) return 'people';
-      if (path.startsWith('about') || hash.startsWith('about')) return 'about';
+      if (path.startsWith('film-fest')) return 'film-fest';
+      if (path.startsWith('as-we-are')) return 'as-we-are';
+      if (path.startsWith('work')) return 'work';
+      if (path.startsWith('events')) return 'events';
+      if (path.startsWith('people')) return 'people';
+      if (path.startsWith('about')) return 'about';
       return 'home';
     };
 
-    const handleHashChange = () => {
-      const target = parseHash();
+    const handleLocationChange = () => {
+      const target = parseRoute();
       if (target !== currentPage) {
         performNavigation(target, false);
       }
     };
 
-    const initialTarget = parseHash();
+    const initialTarget = parseRoute();
     if (initialTarget !== 'home') {
       setCurrentPage(initialTarget);
     }
 
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handleLocationChange);
+    return () => window.removeEventListener('popstate', handleLocationChange);
+  }, [currentPage]);
+
+  // Support intentional in-page anchor scrolling (e.g. #roadmap)
+  useEffect(() => {
+    if (window.location.hash === '#roadmap') {
+      const el = document.getElementById('roadmap');
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
+      }
+    }
   }, [currentPage]);
 
   // Synchronize Open Graph & Twitter Card metadata dynamically
@@ -126,7 +157,7 @@ export const App: React.FC = () => {
     };
   }, []);
 
-  const performNavigation = (nextPage: PageType, updateHash: boolean = true) => {
+  const performNavigation = (nextPage: PageType, updateUrl: boolean = true) => {
     if (nextPage === currentPage && !isTransitioning) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
@@ -139,8 +170,11 @@ export const App: React.FC = () => {
     setCurrentPage(nextPage);
     setIsTransitioning(true);
 
-    if (updateHash) {
-      window.location.hash = nextPage === 'home' ? '/' : `/${nextPage}`;
+    if (updateUrl) {
+      const nextPath = nextPage === 'home' ? '/' : `/${nextPage}`;
+      if (window.location.pathname !== nextPath) {
+        window.history.pushState(null, '', nextPath);
+      }
     }
 
     window.scrollTo({ top: 0, behavior: 'instant' });

@@ -103,7 +103,7 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({
         {/* Top Left: PlusNine +9 Emblem Mark */}
         <div className="site-header__left">
           <a
-            href="#/"
+            href="/"
             onClick={(e) => handleLinkClick('home', e)}
             className="site-header__logo-link"
             aria-label="PlusNine Home"
@@ -120,7 +120,7 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({
         <div className="site-header__center">
           <nav className="floating-dock-pill" aria-label="Main Navigation">
             <a
-              href="#/"
+              href="/"
               onClick={(e) => handleLinkClick('home', e)}
               className={`floating-dock-pill__link ${currentPage === 'home' ? 'is-active' : ''}`}
             >
@@ -128,7 +128,7 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({
             </a>
 
             <a
-              href="#/work"
+              href="/work"
               onClick={(e) => handleLinkClick('work', e)}
               className={`floating-dock-pill__link ${currentPage === 'work' ? 'is-active' : ''}`}
             >
@@ -136,7 +136,7 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({
             </a>
 
             <a
-              href="#/events"
+              href="/events"
               onClick={(e) => handleLinkClick('events', e)}
               className={`floating-dock-pill__link ${currentPage === 'events' ? 'is-active' : ''}`}
             >
@@ -144,7 +144,7 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({
             </a>
 
             <a
-              href="#/people"
+              href="/people"
               onClick={(e) => handleLinkClick('people', e)}
               className={`floating-dock-pill__link ${currentPage === 'people' ? 'is-active' : ''}`}
             >
@@ -152,7 +152,7 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({
             </a>
 
             <a
-              href="#/about"
+              href="/about"
               onClick={(e) => handleLinkClick('about', e)}
               className={`floating-dock-pill__link ${currentPage === 'about' ? 'is-active' : ''}`}
             >
@@ -164,7 +164,7 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({
 
             {/* Dynamic Featured Event: Subtle Outlined Pill */}
             <a
-              href={`#/${FEATURED_NAV_EVENT.page}`}
+              href={`/${FEATURED_NAV_EVENT.page}`}
               onClick={(e) => handleLinkClick(FEATURED_NAV_EVENT.page, e)}
               className={`floating-dock-pill__featured ${
                 currentPage === FEATURED_NAV_EVENT.page ? 'is-active' : ''

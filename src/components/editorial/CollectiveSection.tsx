@@ -26,7 +26,8 @@ export const CollectiveSection: React.FC<CollectiveSectionProps> = ({
     if (onNavigate) {
       onNavigate('work');
     } else {
-      window.location.hash = '/work';
+      window.history.pushState(null, '', '/work');
+      window.dispatchEvent(new PopStateEvent('popstate'));
     }
   };
 
