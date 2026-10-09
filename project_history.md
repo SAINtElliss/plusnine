@@ -2,6 +2,22 @@
 
 ## Session Log
 
+### 2026-10-09 — Venue & Admission Reserve Free Pass Black Button & Mobile Section Ordering
+- **Reserve Free Pass Solid Black Button (`FilmFestPage.tsx`, `main.css`)**:
+  - Restyled `.fest-editorial-btn--primary` to feature a solid near-black background (`var(--color-black)` / `#080808`), black border, signal-orange text (`var(--color-orange)` / `#ff3b16`), and signal-orange ticket icon.
+  - Distinguishes the primary pass reservation action from adjacent white, orange-outlined buttons ("Add to Calendar", "View on Map", "Submit Your Film").
+  - Preserved identical shape (`border-radius: 999px`), sizing (`padding: 8px 18px`), and Eventbrite modal checkout integration trigger (`id="filmfest-eb-trigger-pass"`).
+- **Mobile Section Reordering (`FilmFestPage.tsx`, `main.css`)**:
+  - Added semantic modifier classes `.fest-editorial-card--admission` and `.fest-editorial-card--venue`.
+  - Configured mobile responsive layout (`@media (max-width: 960px)`): Free Admission (ticket illustration, description, Reserve Free Pass CTA, and Submit Your Film link) appears first (`order: 1`), followed by Date & Venue (Roxy Theatre illustration, description, calendar, and map links) (`order: 2`).
+  - Preserved desktop 2-column layout and horizontal alignment unchanged.
+- **Verification & Deployment**:
+  - `npm run typecheck` passed (0 errors).
+  - `npm run build` passed in 2.56s.
+  - Verified in real browser on desktop (1440x900) and mobile (390x844): confirmed solid black button styling and reversed mobile card hierarchy.
+  - Deployed to Vercel production: https://plusnine.vercel.app.
+  - Pushed to GitHub repository: https://github.com/SAINtElliss/plusnine.
+
 ### 2026-10-09 — 4K Film Festival Page Floating VIEW ROADMAP Button & Live Countdown
 - **Floating VIEW ROADMAP Action Button (`FilmFestPage.tsx`, `main.css`)**:
   - Relocated the "VIEW ROADMAP" button from the static document flow into a fixed floating position centered horizontally near the bottom of the viewport (`bottom: max(24px, calc(env(safe-area-inset-bottom, 0px) + 20px))`).

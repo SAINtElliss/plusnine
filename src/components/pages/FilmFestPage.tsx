@@ -60,7 +60,7 @@ export const FilmFestPage: React.FC<FilmFestPageProps> = ({ onNavigate: _onNavig
           <div className="fest-editorial-details-grid">
             
             {/* GROUP 1: DATE & VENUE */}
-            <div className="fest-editorial-card">
+            <div className="fest-editorial-card fest-editorial-card--venue">
               <div className="fest-editorial-card-graphic">
                 <img
                   src="/images/events/roxy_venue_graphic.png"
@@ -96,7 +96,7 @@ export const FilmFestPage: React.FC<FilmFestPageProps> = ({ onNavigate: _onNavig
             </div>
 
             {/* GROUP 2: FREE ADMISSION */}
-            <div className="fest-editorial-card">
+            <div className="fest-editorial-card fest-editorial-card--admission">
               <div className="fest-editorial-card-graphic">
                 <img
                   src="/images/events/free_ticket_graphic.png"
