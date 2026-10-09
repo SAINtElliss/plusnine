@@ -3,8 +3,9 @@
 ## Overview
 PlusNine is an independent creative development house, film production studio, and cultural magazine platform based in Edmonton, Alberta and operating globally. The website is engineered as a cinematic editorial platform for a Black-led creative collective: visual, tactile, cultured, and current. It features deliberate visual alternation between near-black (`#080808`), warm paper (`#f1f0eb`), pure white (`#ffffff`), and signal orange-red (`#ff3b16`), paired with a signature typography contrast of **Arial Black** uppercase display, **Georgia** italic serif emphasis, and **Arial/Helvetica** editorial metadata.
 
-## Production URL
+## Production & Repository URLs
 - **Live Site**: [https://plusnine.vercel.app](https://plusnine.vercel.app)
+- **GitHub Repository**: [https://github.com/SAINtElliss/plusnine](https://github.com/SAINtElliss/plusnine)
 
 ## Tech Stack
 - **Framework**: React 18, Vite, TypeScript
@@ -44,6 +45,8 @@ PlusNine/
     │   ├── projects.ts          # PlusNine project metadata & PageType union
     │   ├── heroSlides.ts        # Modular hero slides data configuration
     │   └── members.ts           # PlusNine 11-member roster & profile data
+    ├── utils/
+    │   └── eventbrite.ts        # Official Eventbrite modal checkout widget integration
     └── components/
         ├── scrollbar/
         │   └── CustomScrollbar.tsx # Bespoke PlusNine scrollbar with drag & seek
