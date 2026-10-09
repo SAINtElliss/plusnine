@@ -61,7 +61,7 @@ export const PLUSNINE_MEMBERS: Member[] = [
   {
     id: 'denzel',
     name: 'Denzel',
-    role: 'Sound Engineer',
+    role: 'Technical Chairman & Omniscient Sound Engineer',
     secondaryIdentity: 'Music Producer',
     disciplines: ['Sound Engineering', 'Music Production', 'Sound Design'],
     creativeIdentity: 'Sound engineer and music producer producing original beats, sonic textures, and scores for PlusNine and independent releases.'
@@ -92,15 +92,15 @@ export const PLUSNINE_MEMBERS: Member[] = [
   {
     id: 'nani',
     name: 'Nani',
-    role: 'Logistics Chair',
+    role: 'Logistics Chairman',
     secondaryIdentity: 'Musician',
     disciplines: ['Logistics', 'Operations', 'Music'],
-    creativeIdentity: 'Logistics chair and music artist orchestrating independent sound projects and collective operations.'
+    creativeIdentity: 'Logistics chairman and music artist orchestrating independent sound projects and collective operations.'
   },
   {
     id: 'nicole',
     name: 'Nicole',
-    role: 'Finance Chair & Digital Creator',
+    role: 'Finance Chairman & Digital Creator',
     disciplines: ['Finance', 'Digital Creation', 'Strategic Planning'],
     creativeIdentity: 'Financial strategist and digital creator managing capital planning and digital content initiatives.'
   },
@@ -122,10 +122,10 @@ export const PLUSNINE_MEMBERS: Member[] = [
   {
     id: 'regina',
     name: 'Regina',
-    role: 'Events Chair',
+    role: 'Events Chairman & Marketing',
     secondaryIdentity: 'Photographer · Beauty Entrepreneur',
     disciplines: ['Event Production', 'Photography', 'Hair Artistry'],
-    creativeIdentity: 'Events chair, photographer, and beauty entrepreneur; founder of Onwemma braiding business.',
+    creativeIdentity: 'Events chairman, photographer, and beauty entrepreneur; founder of Onwemma braiding business.',
     ventures: [
       {
         name: 'Onwemma',
@@ -145,7 +145,7 @@ export const PLUSNINE_MEMBERS: Member[] = [
   {
     id: 'toluwani',
     name: 'Toluwani',
-    role: 'Co-Chair Finance & Co-Editor-in-Chief',
+    role: 'Co-Chairman Finance & Co-Editor-in-Chief',
     secondaryIdentity: 'Musician',
     disciplines: ['Financial Leadership', 'Editorial Direction', 'Music'],
     creativeIdentity: 'Musician, financial strategist, and Co-Editor-in-Chief contributing across sonic releases and print editions.'
