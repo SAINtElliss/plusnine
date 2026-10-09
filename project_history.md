@@ -2,6 +2,28 @@
 
 ## Session Log
 
+### 2026-10-09 — Member Profiles Update (Ellis: Web Design & Regina: Creative Director)
+- **Ellis Profile Updates (`src/data/members.ts`)**:
+  - Added "Web Design" to creative disciplines (`['Graphic Design', 'Web Design', 'Social Media Management', 'Video Editing', 'Music']`).
+  - Updated creative identity description to include web design alongside graphic design, social media management, video editing, and music.
+  - Indexed for site-wide search queries for "Web Design".
+- **Regina Profile Updates (`src/data/members.ts`)**:
+  - Added "Creative Director" to creative disciplines (`['Creative Director', 'Event Production', 'Photography', 'Hair Artistry']`).
+  - Added "Creative Director" to secondary creative identity (`Creative Director · Photographer · Beauty Entrepreneur`).
+  - Maintained primary PlusNine role as `Events Chairman & Marketing`.
+  - Indexed for site-wide search queries for "Creative Director".
+- **Cross-Surface Consistency (`PeoplePage.tsx`, `ExpandableSearch.tsx`)**:
+  - People directory cards render updated secondary identities and roles.
+  - Individual profile pages (`#/people/ellis`, `#/people/regina`) render updated discipline pill badges, metadata breadcrumbs, and descriptions.
+  - Search dropdown dynamically matches "Web Design" (returns Ellis) and "Creative Director" (returns Regina).
+  - All other member data, disciplines, styling, and functionality preserved unchanged.
+- **Verification & Deployment**:
+  - `npm run typecheck` passed (0 errors).
+  - `npm run build` passed.
+  - Automated Chrome DevTools Protocol verification confirmed People directory, individual profiles, and live site-wide search queries.
+  - Deployed live to Vercel production: https://plusnine.vercel.app.
+  - Pushed to GitHub repository: https://github.com/SAINtElliss/plusnine (commit `e922f08`).
+
 ### 2026-10-09 — People Directory & Member Roles Update ("Chairman" Standardization)
 - **Role Standardization to "Chairman" (`src/data/members.ts`)**:
   - Replaced all instances of "Chair" with "Chairman" across member roles and creative identities, including compound titles:
