@@ -7693,3 +7693,467 @@ iframe[id^="eventbrite-widget-modal"] {
   color: #ffffff !important;
 }
 
+/* ==========================================================================
+   4K Film Festival Scheduled Roadmap Release & Admin Preview
+   ========================================================================== */
+
+/* Admin Preview Notification Alert Bar */
+.admin-preview-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #080808;
+  color: #ffffff;
+  border: 1px solid rgba(255, 59, 22, 0.5);
+  border-radius: 999px;
+  padding: 10px 20px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 20px rgba(255, 59, 22, 0.15);
+}
+
+.admin-preview-banner__left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+.admin-preview-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--color-orange);
+  color: #ffffff;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.admin-preview-text {
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+}
+
+.admin-preview-exit-btn {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  padding: 4px 14px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.admin-preview-exit-btn:hover {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+/* Roadmap Coming Soon Editorial Placeholder */
+.roadmap-coming-soon-container {
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.roadmap-coming-soon-card {
+  position: relative;
+  background: #ffffff;
+  border: 1.5px solid rgba(8, 8, 8, 0.12);
+  border-radius: 16px;
+  padding: 56px 48px 40px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.roadmap-coming-soon-glow {
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(255, 59, 22, 0.12) 0%, rgba(255, 59, 22, 0) 70%);
+  pointer-events: none;
+}
+
+.roadmap-coming-soon-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(8, 8, 8, 0.55);
+}
+
+.roadmap-coming-soon-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-orange);
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+}
+
+.roadmap-coming-soon-title {
+  margin: 0 0 18px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.roadmap-coming-soon-title-sans {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--color-black);
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+.roadmap-coming-soon-title-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.6rem, 3.8vw, 2.6rem);
+  color: var(--color-orange);
+  line-height: 1.05;
+}
+
+.roadmap-coming-soon-desc {
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: rgba(8, 8, 8, 0.75);
+  max-width: 680px;
+  margin: 0 0 32px;
+}
+
+.roadmap-coming-soon-specs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.roadmap-coming-soon-spec-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(8, 8, 8, 0.04);
+  border: 1px solid rgba(8, 8, 8, 0.08);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: rgba(8, 8, 8, 0.85);
+}
+
+.roadmap-coming-soon-spec-item strong {
+  color: var(--color-black);
+}
+
+.roadmap-coming-soon-icon {
+  color: var(--color-orange);
+}
+
+.roadmap-coming-soon-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: rgba(8, 8, 8, 0.58);
+  margin-bottom: 28px;
+}
+
+.roadmap-coming-soon-sparkle {
+  color: var(--color-orange);
+  flex-shrink: 0;
+}
+
+.roadmap-coming-soon-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: 20px;
+  border-top: 1px solid rgba(8, 8, 8, 0.08);
+}
+
+.roadmap-admin-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: rgba(8, 8, 8, 0.45);
+  border: 1px solid rgba(8, 8, 8, 0.15);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.roadmap-admin-trigger-btn:hover {
+  color: #080808;
+  border-color: #080808;
+  background: rgba(8, 8, 8, 0.04);
+}
+
+/* Curator Admin Login Modal Dialog */
+.admin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeInModal 0.2s ease-out forwards;
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.admin-modal-dialog {
+  background: #0d0d0f;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  padding: 32px;
+  width: 100%;
+  max-width: 440px;
+  color: #ffffff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  animation: scaleInModal 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes scaleInModal {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.admin-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.admin-modal-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-modal-icon {
+  color: var(--color-orange);
+}
+
+.admin-modal-title {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.admin-modal-close-btn {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: color 0.2s ease;
+}
+
+.admin-modal-close-btn:hover {
+  color: #ffffff;
+}
+
+.admin-modal-desc {
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.68);
+  margin: 0 0 24px;
+}
+
+.admin-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.admin-modal-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.admin-modal-input-icon {
+  position: absolute;
+  left: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+}
+
+.admin-modal-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  padding: 12px 14px 12px 38px;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  outline: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.admin-modal-input:focus {
+  border-color: var(--color-orange);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.admin-modal-error {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: #ff5544;
+  background: rgba(255, 85, 68, 0.1);
+  border: 1px solid rgba(255, 85, 68, 0.25);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.admin-modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.admin-modal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-modal-btn--cancel {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.admin-modal-btn--cancel:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.admin-modal-btn--submit {
+  background: var(--color-orange);
+  color: #ffffff;
+  border: 1px solid var(--color-orange);
+}
+
+.admin-modal-btn--submit:hover:not(:disabled) {
+  background: #ff5232;
+  border-color: #ff5232;
+  transform: translateY(-1px);
+}
+
+.admin-modal-btn--submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-modal-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 640px) {
+  .roadmap-coming-soon-card {
+    padding: 36px 24px 28px;
+  }
+
+  .roadmap-coming-soon-specs {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-preview-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 16px;
+    padding: 14px 18px;
+  }
+
+  .admin-preview-exit-btn {
+    align-self: flex-end;
+  }
+}
+
+

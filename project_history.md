@@ -2,6 +2,33 @@
 
 ## Session Log
 
+### 2026-10-09 — 4K Film Festival Roadmap Scheduled Release & Secure Curator Preview
+- **Zero Client-Side Data Leakage & Server-Side Schedule Architecture (`api/roadmap.ts`)**:
+  - Completely decoupled the master festival schedule (`MASTER_ROADMAP_ITEMS`) from client-side bundles and relocated it into a standalone serverless function (`/api/roadmap`).
+  - Audited and verified production JavaScript bundle (`dist/assets/*.js`): 0% traces of unreleased films, titles, synopses, directors, or schedule items.
+  - Implemented timezone-aware evaluation in `America/Edmonton` (MST) against configurable release timestamp `2026-11-10T09:00:00-07:00` (overridable via `ROADMAP_RELEASE_DATE` environment variable).
+- **Secure Curator Preview & Authentication**:
+  - Engineered dual authentication channels for private preview access:
+    1. Direct URL query parameter: `#/film-fest?admin=plusnine2026` or `?key=plusnine2026`.
+    2. Discrete passkey modal (`AdminPreviewModal.tsx`) triggered from the placeholder card with autofocus, input masking, and ESC dismissal.
+  - Supported authentication via `Authorization: Bearer <key>`, `x-admin-key` header, and query parameters. Passkey overridable via `ROADMAP_ADMIN_KEY` environment variable.
+  - Added session persistence (`sessionStorage`) with an ambient "Curator Preview" status banner and 1-click "Exit Preview" reset control.
+- **Warm Paper Coming Soon Placeholder (`RoadmapComingSoon.tsx`)**:
+  - Designed an editorial warm paper (`#f1f0eb`) placeholder card matching PlusNine visual identity.
+  - Features dynamic release date formatting in Edmonton time (`Nov 10, 2026 · 9:00 AM MST`), ambient breathing glow, and discreet curator preview access lock.
+- **Autonomous Release & Smooth Navigation (`FilmFestPage.tsx`, `FestivalRoadmap.tsx`)**:
+  - Implemented 15-second background polling timer on pre-release states that automatically fetches and reveals the full roadmap the instant release time arrives without requiring page refresh or deployment.
+  - Floating centered `VIEW ROADMAP` button smoothly scrolls to the `#roadmap` section target in both locked (placeholder) and unlocked (full timetable) states.
+  - Vite dev server middleware added to `vite.config.ts` for local offline parity.
+- **Verification & Deployment**:
+  - `npm run typecheck` passed (0 errors).
+  - `npm run build` passed in 2.28s.
+  - Verified live production endpoints on `https://plusnine.vercel.app/api/roadmap`:
+    - Public unauthenticated: `released: false`, `items: []` (0 items returned).
+    - Curator authenticated: `isAdminPreview: true`, 10 complete timetable items returned.
+    - Invalid passkey: `isAdminPreview: false`, `items: []`.
+  - Deployed live to Vercel production: https://plusnine.vercel.app.
+
 ### 2026-10-09 — Comprehensive Site-Wide Icon & Mobile Emoji Audit (SVG Unification)
 - **Codebase Icon Audit & Discovery**:
   - Audited all `.tsx`, `.ts`, `.html`, and `.css` files across `src/` for Unicode characters and symbols with emoji-presentation properties on iOS (Apple Color Emoji) and Android (Google Noto Color Emoji).
