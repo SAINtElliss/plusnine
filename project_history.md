@@ -2,6 +2,25 @@
 
 ## Session Log
 
+### 2026-10-09 — Comprehensive Site-Wide Icon & Mobile Emoji Audit (SVG Unification)
+- **Codebase Icon Audit & Discovery**:
+  - Audited all `.tsx`, `.ts`, `.html`, and `.css` files across `src/` for Unicode characters and symbols with emoji-presentation properties on iOS (Apple Color Emoji) and Android (Google Noto Color Emoji).
+  - Identified that the top floating navigation dock (`FloatingDock.tsx`) rendered a raw Unicode character (`↗` / `U+2197`) inside `FEATURED_NAV_EVENT` and `.floating-dock-pill__featured-arrow`. While displaying as a monochrome character on desktop, `U+2197` on iOS/Android triggered colorful emoji rendering, clashing with the monochrome aesthetic.
+  - Verified that all other interactive buttons, page controls, player modals, and roadmap stops already utilized standard vector SVG icons from `lucide-react`.
+- **Lucide SVG Replacement (`FloatingDock.tsx`, `main.css`)**:
+  - Replaced the Unicode arrow string in `FEATURED_NAV_EVENT` with `<ArrowUpRight size={11} strokeWidth={2.5} className="floating-dock-pill__featured-arrow" aria-hidden="true" />` from `lucide-react`.
+  - Refined `.floating-dock-pill__featured-arrow` CSS to use `display: inline-flex`, `align-items: center`, `justify-content: center`, `flex-shrink: 0`, and smooth color and transform transitions.
+  - Set `stroke="currentColor"` so the SVG arrow seamlessly transitions from pure white (`#ffffff`) to pitch black (`#000000`) on hover (`.floating-dock-pill__featured:hover`) and when active (`.is-active`), matching the typography.
+  - Cleaned `aria-label` to `${FEATURED_NAV_EVENT.title} — ${FEATURED_NAV_EVENT.metadata}` for accessibility.
+- **Copyright Typography Protection (`Colophon.tsx`)**:
+  - Protected the colophon copyright notice (`&copy;&#xFE0E;`) with Unicode Variation Selector-15 (`U+FE0E`), explicitly enforcing text presentation and preventing iOS Safari from substituting the copyright mark with the blue Apple emoji.
+- **Verification & Deployment**:
+  - `npm run typecheck` passed (0 errors).
+  - `npm run build` passed in 2.36s.
+  - Verified with browser subagent on desktop (`1536x730`) and mobile (`390x844`): confirmed DOM renders `<svg class="lucide lucide-arrow-up-right ...">` with 11px dimensions, crisp 2.5px stroke width, zero Unicode arrow text, and flawless hover color transitions.
+  - Deployed to Vercel production: https://plusnine.vercel.app and https://www.plusnine.org.
+  - Pushed to GitHub repository: https://github.com/SAINtElliss/plusnine (commit `6bbcfd8`).
+
 ### 2026-10-09 — Homepage SEO Update & Categorized Site-Wide Search
 - **Homepage SEO & Social Sharing Previews (`index.html`, `src/App.tsx`)**:
   - Updated title to exactly `PlusNine | Culture & Community` for browser tabs, SEO title, Open Graph (`og:title`), and Twitter Cards (`twitter:title`).
