@@ -2,6 +2,17 @@
 
 ## Session Log
 
+### 2026-10-09 — Root Container Restoration & Defensive Mounting Safeguard
+- **Root Cause**:
+  - `<div id="root"></div>` was missing from `index.html`, causing `ReactDOM.createRoot(null)` to throw `Target container is not a DOM element` and resulting in a blank screen.
+- **Fix & Hardening (`index.html`, `src/main.tsx`)**:
+  - Restored `<div id="root"></div>` in `index.html`.
+  - Added a defensive fallback in `src/main.tsx` that programmatically creates and appends `<div id="root">` to `document.body` if absent, ensuring the app can never fail to mount even if HTML templates vary.
+- **Verification & Deployment**:
+  - Built and deployed live to Vercel production: https://plusnine.vercel.app (deployment: https://plusnine-3x8qakug2-folajinmi13-1183s-projects.vercel.app).
+  - Verified live rendering in a real browser via Chrome DevTools / browser subagent with 0 console errors and full video/artwork rendering.
+  - Pushed commit `f5fc659` directly to `https://github.com/SAINtElliss/plusnine.git`.
+
 ### 2026-10-08 — Eventbrite Official Modal Checkout Integration (Homepage & 4K Film Festival Page)
 - **Official Script & Integration Engine (`index.html`, `src/utils/eventbrite.ts`)**:
   - Preloaded the official script `https://www.eventbrite.ca/static/widgets/eb_widgets.js` in `index.html`.
