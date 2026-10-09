@@ -2,6 +2,22 @@
 
 ## Session Log
 
+### 2026-10-09 — 4K Film Festival Swapped Button Color Schemes (VIEW ROADMAP & RESERVE FREE PASS)
+- **VIEW ROADMAP Floating Button (`main.css`)**:
+  - Restyled `.fest-floating-roadmap-btn` to feature a solid near-black background (`var(--color-black)` / `#080808`), black border, signal-orange text (`var(--color-orange)` / `#ff3b16`), and signal-orange down-arrow icon.
+  - Updated `@keyframes floatRoadmapPulse` with a refined black shadow and subtle ambient orange glow (`rgba(255, 59, 22, 0.45)`).
+  - Maintained existing centered fixed floating position, smooth entrance animation, auto-hide when intersecting `#roadmap`, and smooth scroll interaction.
+- **RESERVE FREE PASS Primary Button (`main.css`)**:
+  - Restyled `.fest-editorial-btn--primary` to feature a solid signal-orange background (`var(--color-orange)` / `#ff3b16`), matching orange border, crisp white text (`#ffffff`), and white ticket icon (`#ffffff`).
+  - Preserved existing pill shape, sizing, mobile ordering, and Eventbrite modal checkout popup connection (`#filmfest-eb-trigger-pass`).
+- **Verification & Deployment**:
+  - `npm run typecheck` passed (0 errors).
+  - `npm run build` passed in 2.44s.
+  - Verified in real browser with DevTools / subagent: confirmed exact computed colors (Roadmap: `rgb(8,8,8)` bg + `rgb(255,59,22)` color/icon; Reserve: `rgb(255,59,22)` bg + `rgb(255,255,255)` color/icon) and verified smooth scrolling.
+  - Deployed to Vercel production: https://plusnine.vercel.app and https://www.plusnine.org.
+  - Pushed to GitHub repository: https://github.com/SAINtElliss/plusnine (commit `68a6f06`).
+
+
 ### 2026-10-09 — Social Sharing Previews (Open Graph & Twitter Card Metadata)
 - **Homepage Social Preview (`index.html`, `public/images/og-homepage.png`)**:
   - Configured clean, high-resolution 1200×630 preview card centered with the official PlusNine emblem on a solid black background (`rgb(0, 0, 0)`), avoiding project artwork.
