@@ -23,20 +23,22 @@ export const App: React.FC = () => {
   const [showreelStartTime, setShowreelStartTime] = useState(0);
   const transitionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Synchronize with URL hash routing
+  // Synchronize with URL hash routing & direct pathnames
   useEffect(() => {
     const parseHash = (): PageType => {
+      const path = window.location.pathname.toLowerCase().replace(/^\//, '');
       const hash = window.location.hash.toLowerCase().replace('#/', '').replace('#', '');
-      if (hash.startsWith('film-submission')) {
+
+      if (path.startsWith('film-submission') || hash.startsWith('film-submission')) {
         window.location.href = '/film-submission';
         return 'home';
       }
-      if (hash.startsWith('as-we-are')) return 'as-we-are';
-      if (hash.startsWith('work')) return 'work';
-      if (hash.startsWith('events')) return 'events';
-      if (hash.startsWith('people')) return 'people';
-      if (hash.startsWith('about')) return 'about';
-      if (hash.startsWith('film-fest')) return 'film-fest';
+      if (path.startsWith('film-fest') || hash.startsWith('film-fest')) return 'film-fest';
+      if (path.startsWith('as-we-are') || hash.startsWith('as-we-are')) return 'as-we-are';
+      if (path.startsWith('work') || hash.startsWith('work')) return 'work';
+      if (path.startsWith('events') || hash.startsWith('events')) return 'events';
+      if (path.startsWith('people') || hash.startsWith('people')) return 'people';
+      if (path.startsWith('about') || hash.startsWith('about')) return 'about';
       return 'home';
     };
 
@@ -54,6 +56,65 @@ export const App: React.FC = () => {
 
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [currentPage]);
+
+  // Synchronize Open Graph & Twitter Card metadata dynamically
+  useEffect(() => {
+    const updateMetaTag = (selector: string, attr: string, value: string) => {
+      let el = document.querySelector(selector);
+      if (!el) {
+        el = document.createElement('meta');
+        if (selector.startsWith('meta[name="')) {
+          el.setAttribute('name', selector.replace('meta[name="', '').replace('"]', ''));
+        } else if (selector.startsWith('meta[property="')) {
+          el.setAttribute('property', selector.replace('meta[property="', '').replace('"]', ''));
+        }
+        document.head.appendChild(el);
+      }
+      el.setAttribute(attr, value);
+    };
+
+    if (currentPage === 'film-fest') {
+      const title = '4K Film Festival 2026 | PlusNine';
+      const description = 'A celebration of African and diaspora storytelling through film. November 12, 2026 at The Roxy Theatre, Edmonton. Free admission.';
+      const url = 'https://www.plusnine.org/film-fest';
+      const image = 'https://www.plusnine.org/images/og-filmfest.png';
+      const imageAlt = '4K Film Festival 2026 — PlusNine';
+
+      document.title = title;
+      updateMetaTag('meta[name="description"]', 'content', description);
+      updateMetaTag('meta[property="og:title"]', 'content', title);
+      updateMetaTag('meta[property="og:description"]', 'content', description);
+      updateMetaTag('meta[property="og:url"]', 'content', url);
+      updateMetaTag('meta[property="og:image"]', 'content', image);
+      updateMetaTag('meta[property="og:image:secure_url"]', 'content', image);
+      updateMetaTag('meta[property="og:image:alt"]', 'content', imageAlt);
+      updateMetaTag('meta[name="twitter:title"]', 'content', title);
+      updateMetaTag('meta[name="twitter:description"]', 'content', description);
+      updateMetaTag('meta[name="twitter:url"]', 'content', url);
+      updateMetaTag('meta[name="twitter:image"]', 'content', image);
+      updateMetaTag('meta[name="twitter:image:alt"]', 'content', imageAlt);
+    } else {
+      const title = 'PlusNine — An Independent Creative Collective';
+      const description = 'A collective of creatives shaping culture through film, music, fashion, editorial, art, and shared experiences.';
+      const url = 'https://www.plusnine.org/';
+      const image = 'https://www.plusnine.org/images/og-homepage.png';
+      const imageAlt = 'PlusNine — An Independent Creative Collective';
+
+      document.title = title;
+      updateMetaTag('meta[name="description"]', 'content', description);
+      updateMetaTag('meta[property="og:title"]', 'content', title);
+      updateMetaTag('meta[property="og:description"]', 'content', description);
+      updateMetaTag('meta[property="og:url"]', 'content', url);
+      updateMetaTag('meta[property="og:image"]', 'content', image);
+      updateMetaTag('meta[property="og:image:secure_url"]', 'content', image);
+      updateMetaTag('meta[property="og:image:alt"]', 'content', imageAlt);
+      updateMetaTag('meta[name="twitter:title"]', 'content', title);
+      updateMetaTag('meta[name="twitter:description"]', 'content', description);
+      updateMetaTag('meta[name="twitter:url"]', 'content', url);
+      updateMetaTag('meta[name="twitter:image"]', 'content', image);
+      updateMetaTag('meta[name="twitter:image:alt"]', 'content', imageAlt);
+    }
   }, [currentPage]);
 
   // Clean up timer on unmount

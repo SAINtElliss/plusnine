@@ -16,6 +16,14 @@
   ],
   "rewrites": [
     {
+      "source": "/film-fest",
+      "destination": "/film-fest/index.html"
+    },
+    {
+      "source": "/film-fest/",
+      "destination": "/film-fest/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
