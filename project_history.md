@@ -2,6 +2,23 @@
 
 ## Session Log
 
+### 2026-10-09 — People Section Clean-Up & Member Roles Update
+- **Removed Member Profile Navigation & Contact Buttons (`PeoplePage.tsx`)**:
+  - Removed "CONNECT WITH [NAME]" email CTA buttons from all individual member profile pages.
+  - Removed "BACK TO PEOPLE DIRECTORY" header breadcrumb button and "BACK TO PEOPLE" profile navigation buttons from all individual member profile pages.
+  - Kept bottom open call strip ("Submit Film" & "Submit Treatment") and top persistent navigation dock intact.
+- **Member Role Updates (`members.ts`)**:
+  - Updated **Lucy's** PlusNine role to **Editorial & Outreach** (with disciplines: Editorial Direction, Outreach, Writing).
+  - Updated **Ezinne's** PlusNine role by removing Outreach, leaving **Co-Editor-in-Chief** (with disciplines: Editorial Direction, Event Hosting).
+  - Ensured consistent rendering across both the circular People directory and individual member profile detail cards.
+- **Verification & Deployment**:
+  - `npm run typecheck` passed (0 errors).
+  - `npm run build` passed in 2.26s.
+  - Verified in real browser with browser subagent: inspected directory cards for Lucy and Ezinne, navigated to both individual profile pages, verified absence of back buttons and connect buttons, and captured visual screenshots.
+  - Deployed to Vercel production: https://plusnine.vercel.app and https://www.plusnine.org.
+  - Pushed to GitHub repository: https://github.com/SAINtElliss/plusnine (commit `09f0f1a`).
+
+
 ### 2026-10-09 — 4K Film Festival Swapped Button Color Schemes (VIEW ROADMAP & RESERVE FREE PASS)
 - **VIEW ROADMAP Floating Button (`main.css`)**:
   - Restyled `.fest-floating-roadmap-btn` to feature a solid near-black background (`var(--color-black)` / `#080808`), black border, signal-orange text (`var(--color-orange)` / `#ff3b16`), and signal-orange down-arrow icon.
