@@ -71,8 +71,8 @@ export const PLUSNINE_MEMBERS: Member[] = [
     name: 'Ellis',
     role: 'Graphic Design, SMM & Editing',
     secondaryIdentity: 'Musician',
-    disciplines: ['Graphic Design', 'Social Media Management', 'Video Editing', 'Music'],
-    creativeIdentity: 'Multi-disciplinary creative working across graphic design, editorial video editing, social media management, and music.'
+    disciplines: ['Graphic Design', 'Web Design', 'Social Media Management', 'Video Editing', 'Music'],
+    creativeIdentity: 'Multi-disciplinary creative working across graphic design, web design, editorial video editing, social media management, and music.'
   },
   {
     id: 'ezinne',
@@ -123,8 +123,8 @@ export const PLUSNINE_MEMBERS: Member[] = [
     id: 'regina',
     name: 'Regina',
     role: 'Events Chairman & Marketing',
-    secondaryIdentity: 'Photographer · Beauty Entrepreneur',
-    disciplines: ['Event Production', 'Photography', 'Hair Artistry'],
+    secondaryIdentity: 'Creative Director · Photographer · Beauty Entrepreneur',
+    disciplines: ['Creative Director', 'Event Production', 'Photography', 'Hair Artistry'],
     creativeIdentity: 'Events chairman, photographer, and beauty entrepreneur; founder of Onwemma braiding business.',
     ventures: [
       {
