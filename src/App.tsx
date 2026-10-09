@@ -231,7 +231,7 @@ export const App: React.FC = () => {
               onNavigate={handleNavigate}
             />
 
-            {/* 2. Recently at +9 (Warm paper #f1f0eb · NOT A FEED / A POINT OF VIEW) */}
+            {/* 2. Recently at +9 (Pure white #ffffff · NOT A FEED / A POINT OF VIEW) */}
             <RecentlySection onNavigate={handleNavigate} />
 
             {/* 3. From the Collective (Near-black #080808 · Asymmetrical Releases) */}
@@ -240,7 +240,7 @@ export const App: React.FC = () => {
               onNavigate={handleNavigate}
             />
 
-            {/* 4. Upcoming (Warm paper #f1f0eb · Horizontal Editorial Rows) */}
+            {/* 4. Upcoming (Pure white #ffffff · Horizontal Editorial Rows) */}
             <UpcomingSection onNavigate={handleNavigate} />
           </>
         );

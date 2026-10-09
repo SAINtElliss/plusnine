@@ -1,7 +1,7 @@
 # PlusNine — Creative Studio & Visual Culture Platform
 
 ## Overview
-PlusNine is an independent creative development house, film production studio, and cultural magazine platform based in Edmonton, Alberta and operating globally. The website is engineered as a cinematic editorial platform for a Black-led creative collective: visual, tactile, cultured, and current. It features deliberate visual alternation between near-black (`#080808`), warm paper (`#f1f0eb`), pure white (`#ffffff`), and signal orange-red (`#ff3b16`), paired with a signature typography contrast of **Arial Black** uppercase display, **Georgia** italic serif emphasis, and **Arial/Helvetica** editorial metadata.
+PlusNine is an independent creative development house, film production studio, and cultural magazine platform based in Edmonton, Alberta and operating globally. The website is engineered as a cinematic editorial platform for a Black-led creative collective: visual, tactile, cultured, and current. It features deliberate visual alternation between near-black (`#080808`), pure white (`#ffffff`), and signal orange-red (`#ff3b16`), paired with a signature typography contrast of **Arial Black** uppercase display, **Georgia** italic serif emphasis, and **Arial/Helvetica** editorial metadata.
 
 ## Production & Repository URLs
 - **Live Site**: [https://plusnine.vercel.app](https://plusnine.vercel.app)
@@ -43,7 +43,7 @@ PlusNine/
     ├── main.tsx                 # Application entry point
     ├── App.tsx                  # Root orchestrator & HTML5 History router (clean path routes)
     ├── styles/
-    │   ├── tokens.css           # Color tokens (#080808, #f1f0eb, #ff3b16), typography
+    │   ├── tokens.css           # Color tokens (#080808, #ffffff, #ff3b16), typography
     │   └── main.css             # Main stylesheet, editorial moments & responsive rules
     ├── data/
     │   ├── projects.ts          # PlusNine project metadata & PageType union

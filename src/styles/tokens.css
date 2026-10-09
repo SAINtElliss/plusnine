@@ -1,7 +1,7 @@
 :root {
   /* Editorial Alternating Palette */
   --color-black: #080808;
-  --color-paper: #f1f0eb;
+  --color-paper: #ffffff;
   --color-white: #ffffff;
   --color-orange: #ff3b16;
   --accent-orange: #ff3b16;
@@ -19,8 +19,8 @@
   --text-muted: #71717a;
   --text-inverse: #080808;
 
-  /* Warm paper theme variables */
-  --paper-bg: #f1f0eb;
+  /* Pure white light theme variables */
+  --paper-bg: #ffffff;
   --paper-text: #080808;
   --paper-text-main: #080808;
   --paper-text-muted: #6b6a65;
