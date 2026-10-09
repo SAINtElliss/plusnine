@@ -2,6 +2,26 @@
 
 ## Session Log
 
+### 2026-10-09 — People Directory & Member Roles Update ("Chairman" Standardization)
+- **Role Standardization to "Chairman" (`src/data/members.ts`)**:
+  - Replaced all instances of "Chair" with "Chairman" across member roles and creative identities, including compound titles:
+    - **Regina**: `Events Chairman & Marketing` (updated role and creative identity).
+    - **Denzel**: `Technical Chairman & Omniscient Sound Engineer` (updated role).
+    - **Nani**: `Logistics Chairman` (updated role and creative identity).
+    - **Nicole**: `Finance Chairman & Digital Creator` (updated role).
+    - **Toluwani**: `Co-Chairman Finance & Co-Editor-in-Chief` (updated role).
+  - Verified 0 remaining instances of "Chair" without "Chairman" across the entire codebase.
+- **Cross-Surface Consistency (`PeoplePage.tsx`, `ExpandableSearch.tsx`)**:
+  - Confirmed People directory cards, individual member profile pages (`#/people/:id`), and site-wide search dropdown index dynamically from `PLUSNINE_MEMBERS`.
+  - Verified exact title rendering on directory cards, dedicated profile detail views, and search results.
+  - Kept all other member information, disciplines, styling, and functionality unchanged.
+- **Verification & Deployment**:
+  - `npm run typecheck` passed (0 errors).
+  - `npm run build` passed.
+  - Automated browser verification confirmed directory cards, individual profiles (`#/people/denzel`, `#/people/regina`), and site-wide search queries ("Chairman", "Regina", "Denzel").
+  - Deployed live to Vercel production: https://plusnine.vercel.app.
+  - Pushed to GitHub repository: https://github.com/SAINtElliss/plusnine (commit `30c9978`).
+
 ### 2026-10-09 — Header Navigation Refinement (Expandable Magazine, Inward Growth & Anchored Mobile Menu)
 - **Smooth Expandable Magazine Button (`FloatingDock.tsx`, `main.css`)**:
   - Transformed the static Magazine button into an expandable glassmorphic circular icon button (`width: 36px; height: 36px`) matching the Contact button.
