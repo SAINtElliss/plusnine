@@ -2,6 +2,30 @@
 
 ## Session Log
 
+### 2026-10-09 — Social Sharing Previews (Open Graph & Twitter Card Metadata)
+- **Homepage Social Preview (`index.html`, `public/images/og-homepage.png`)**:
+  - Configured clean, high-resolution 1200×630 preview card centered with the official PlusNine emblem on a solid black background (`rgb(0, 0, 0)`), avoiding project artwork.
+  - Set static `<title>`: `PlusNine — An Independent Creative Collective`.
+  - Set `<meta name="description">`: `A collective of creatives shaping culture through film, music, fashion, editorial, art, and shared experiences.`.
+  - Integrated Open Graph tags (`og:title`, `og:description`, `og:url` = `https://www.plusnine.org/`, `og:image` = `https://www.plusnine.org/images/og-homepage.png`, `og:image:width` = `1200`, `og:image:height` = `630`, `og:type` = `website`).
+  - Integrated Twitter Card tags (`twitter:card` = `summary_large_image`, `twitter:title`, `twitter:description`, `twitter:image`).
+- **4K Film Festival Social Preview (`scripts/generate-meta-pages.js`, `public/images/og-filmfest.png`, `vercel.json`)**:
+  - Created 1200×630 preview card cropped from master 4K asset preserving The Roxy Theatre, central 4K logo, and admission tickets.
+  - Set `<title>`: `4K Film Festival 2026 | PlusNine`.
+  - Set `<meta name="description">`: `A celebration of African and diaspora storytelling through film. November 12, 2026 at The Roxy Theatre, Edmonton. Free admission.`.
+  - Built pre-render build script (`scripts/generate-meta-pages.js`) creating `dist/film-fest/index.html` with static Open Graph and Twitter tags for social crawlers (iMessage, Twitter, WhatsApp, Facebook, LinkedIn, Discord).
+  - Added explicit edge rewrite in `vercel.json` routing `/film-fest` and `/film-fest/` to `/film-fest/index.html`.
+- **Client-Side SPA Synchronization (`src/App.tsx`)**:
+  - Enhanced hash and pathname routing to detect direct `/film-fest` visits.
+  - Added dynamic head metadata synchronization effect updating `document.title`, `meta[name="description"]`, `og:*`, and `twitter:*` tags during in-app navigation.
+- **Verification & Deployment**:
+  - `npm run typecheck` passed (0 errors).
+  - `npm run build` passed, generating `dist/film-fest/index.html`.
+  - Deployed to Vercel production: https://plusnine.vercel.app and https://www.plusnine.org.
+  - Verified live HTTP response headers and tags via `curl` on both domains.
+  - Pushed to GitHub repository: https://github.com/SAINtElliss/plusnine (commit `1179bef`).
+
+
 ### 2026-10-09 — Venue & Admission Reserve Free Pass Black Button & Mobile Section Ordering
 - **Reserve Free Pass Solid Black Button (`FilmFestPage.tsx`, `main.css`)**:
   - Restyled `.fest-editorial-btn--primary` to feature a solid near-black background (`var(--color-black)` / `#080808`), black border, signal-orange text (`var(--color-orange)` / `#ff3b16`), and signal-orange ticket icon.

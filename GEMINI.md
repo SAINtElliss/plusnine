@@ -24,8 +24,12 @@ PlusNine/
 ├── vercel.json                  # Vercel deployment configuration & caching
 ├── GEMINI.md                    # Project definition & handoff reference
 ├── project_history.md           # Session activity log
+├── scripts/
+│   └── generate-meta-pages.js   # Pre-render generator for social crawler HTML pages
 ├── public/
 │   ├── images/
+│   │   ├── og-homepage.png      # 1200x630 Homepage social preview (logo on black)
+│   │   ├── og-filmfest.png      # 1200x630 4K Film Festival social preview (theatre artwork)
 │   │   ├── hero_poster.jpg      # Hero 480p video poster image
 │   │   ├── noise.png            # 16mm analog grain texture map
 │   │   └── projects/            # Extracted project still frames
