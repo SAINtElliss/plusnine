@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { ArrowUpRight, Menu, BookOpen, Mail } from 'lucide-react';
 import { ExpandableSearch } from './ExpandableSearch';
 import { HamburgerDrawer } from './HamburgerDrawer';
@@ -32,6 +32,8 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeExpanded, setActiveExpanded] = useState<'none' | 'search' | 'magazine' | 'contact'>('none');
+  const headerRightRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,6 +42,53 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Collapse expanded button when tapping/clicking anywhere outside header controls
+  useEffect(() => {
+    const handleOutsideInteraction = (e: MouseEvent | TouchEvent) => {
+      if (
+        headerRightRef.current &&
+        !headerRightRef.current.contains(e.target as Node)
+      ) {
+        setActiveExpanded('none');
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideInteraction);
+    document.addEventListener('touchstart', handleOutsideInteraction, { passive: true });
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideInteraction);
+      document.removeEventListener('touchstart', handleOutsideInteraction);
+    };
+  }, []);
+
+  const isMagazineExpanded = activeExpanded === 'magazine';
+  const isContactExpanded = activeExpanded === 'contact';
+
+  const isTouchOrMobile = () =>
+    window.innerWidth <= 900 || !window.matchMedia('(hover: hover)').matches;
+
+  const handleMagazineClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (isTouchOrMobile()) {
+      if (!isMagazineExpanded) {
+        e.preventDefault();
+        setActiveExpanded('magazine');
+        return;
+      }
+      setActiveExpanded('none');
+    }
+  };
+
+  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (isTouchOrMobile()) {
+      if (!isContactExpanded) {
+        e.preventDefault();
+        setActiveExpanded('contact');
+        return;
+      }
+      setActiveExpanded('none');
+    }
+  };
 
   const handleLinkClick = (page: PageType, e: React.MouseEvent) => {
     e.preventDefault();
@@ -139,24 +188,35 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({
         </div>
 
         {/* Top Right: Search + Magazine + Contact + Mobile Hamburger */}
-        <div className="site-header__right">
-          <ExpandableSearch onSelectProject={onSelectProject} onNavigate={onNavigate} />
+        <div ref={headerRightRef} className="site-header__right">
+          <ExpandableSearch
+            isExpanded={activeExpanded === 'search'}
+            onExpandedChange={(expanded) => setActiveExpanded(expanded ? 'search' : 'none')}
+            onSelectProject={onSelectProject}
+            onNavigate={onNavigate}
+          />
 
           <a
             href="https://www.instagram.com/plusnine.mag/"
             target="_blank"
             rel="noopener noreferrer"
-            className="site-header__magazine-btn"
+            onClick={handleMagazineClick}
+            className={`site-header__magazine-btn site-header__magazine-btn--expandable ${
+              isMagazineExpanded ? 'is-expanded' : ''
+            }`}
             aria-label="PlusNine Magazine"
           >
-            <BookOpen size={12} />
-            <span>MAGAZINE</span>
-            <ArrowUpRight size={11} />
+            <BookOpen size={13} className="site-header__magazine-icon" />
+            <span className="site-header__magazine-text">MAGAZINE</span>
+            <ArrowUpRight size={11} className="site-header__magazine-arrow" />
           </a>
 
           <a
             href="mailto:plus9ineent@gmail.com"
-            className="site-header__contact-btn site-header__contact-btn--expandable"
+            onClick={handleContactClick}
+            className={`site-header__contact-btn site-header__contact-btn--expandable ${
+              isContactExpanded ? 'is-expanded' : ''
+            }`}
             aria-label="Contact PlusNine"
           >
             <Mail size={13} className="site-header__contact-icon" />
@@ -166,7 +226,10 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({
           {/* Mobile Hamburger Toggle */}
           <button
             type="button"
-            onClick={() => setIsMobileMenuOpen(true)}
+            onClick={() => {
+              setActiveExpanded('none');
+              setIsMobileMenuOpen(true);
+            }}
             className="site-header__menu-btn"
             aria-label="Open Navigation Menu"
           >

@@ -2,6 +2,31 @@
 
 ## Session Log
 
+### 2026-10-09 — Header Navigation Refinement (Expandable Magazine, Inward Growth & Anchored Mobile Menu)
+- **Smooth Expandable Magazine Button (`FloatingDock.tsx`, `main.css`)**:
+  - Transformed the static Magazine button into an expandable glassmorphic circular icon button (`width: 36px; height: 36px`) matching the Contact button.
+  - On hover (desktop) and tap (mobile), smoothly expands to reveal "MAGAZINE" alongside the external-link arrow (`ArrowUpRight`) with white solid background (`#ffffff`) and dark typography (`#000000`).
+  - Preserved direct external link navigation to `@plusnine.mag` on Instagram.
+- **Mobile Tap Interactions & Single-Expanded Accordion Architecture (`FloatingDock.tsx`, `ExpandableSearch.tsx`)**:
+  - Implemented centralized header utility state (`activeExpanded: 'none' | 'search' | 'magazine' | 'contact'`).
+  - On mobile/touch devices, replaced hover dependencies with tap interactions:
+    - First tap expands the button (revealing label/input).
+    - Second tap on an expanded button executes the action (opens Instagram for Magazine, launches mailto for Contact).
+    - Tapping another button automatically collapses the previously expanded button (strict single-expanded policy).
+    - Tapping outside anywhere on the page collapses all header buttons back to compact 36px icon circles.
+- **Inward Leftward Growth & Permanently Anchored Mobile Hamburger Menu (`main.css`)**:
+  - Re-engineered `.site-header__right` with `flex-direction: row-reverse;` and anchored ordering:
+    1. Hamburger Menu Button (`order: 1`): permanently anchored at the rightmost edge.
+    2. Contact Button (`order: 2`): expands inward toward the left.
+    3. Magazine Button (`order: 3`): expands inward toward the left.
+    4. Search Bar (`order: 4`): expands inward toward the left into open header space.
+  - Sized mobile expanded search bar to `clamp(140px, 36vw, 185px)` and set `.expandable-search__results` to fixed viewport positioning, eliminating horizontal overflow across all screen sizes (down to 360px).
+  - Verified via Chrome DevTools Protocol automated test suite: the Hamburger menu remained anchored at `right: 382px` with zero horizontal overflow (`scrollWidth === clientWidth`) across all 4 expansion states.
+- **Verification & Deployment**:
+  - `npm run typecheck` passed (0 errors).
+  - `npm run build` passed in 2.82s.
+  - Deployed live to Vercel production: https://plusnine.vercel.app.
+
 ### 2026-10-09 — 4K Film Festival Roadmap Scheduled Release & Secure Curator Preview
 - **Zero Client-Side Data Leakage & Server-Side Schedule Architecture (`api/roadmap.ts`)**:
   - Completely decoupled the master festival schedule (`MASTER_ROADMAP_ITEMS`) from client-side bundles and relocated it into a standalone serverless function (`/api/roadmap`).

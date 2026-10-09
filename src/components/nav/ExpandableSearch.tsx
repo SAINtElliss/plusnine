@@ -17,6 +17,8 @@ import { PLUSNINE_MEMBERS } from '../../data/members';
 interface ExpandableSearchProps {
   onSelectProject?: (project: Project) => void;
   onNavigate?: (page: PageType) => void;
+  isExpanded?: boolean;
+  onExpandedChange?: (expanded: boolean) => void;
 }
 
 type SearchCategory = 'Work' | 'Events' | 'People' | 'Pages';
@@ -36,9 +38,22 @@ interface SearchResultItem {
 
 export const ExpandableSearch: React.FC<ExpandableSearchProps> = ({
   onSelectProject,
-  onNavigate
+  onNavigate,
+  isExpanded: controlledExpanded,
+  onExpandedChange
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [internalExpanded, setInternalExpanded] = useState(false);
+  const isExpanded = controlledExpanded !== undefined ? controlledExpanded : internalExpanded;
+
+  const setExpanded = (next: boolean | ((prev: boolean) => boolean)) => {
+    const nextVal = typeof next === 'function' ? next(isExpanded) : next;
+    if (onExpandedChange) {
+      onExpandedChange(nextVal);
+    } else {
+      setInternalExpanded(nextVal);
+    }
+  };
+
   const [query, setQuery] = useState('');
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -369,7 +384,7 @@ export const ExpandableSearch: React.FC<ExpandableSearchProps> = ({
         containerRef.current &&
         !containerRef.current.contains(e.target as Node)
       ) {
-        setIsExpanded(false);
+        setExpanded(false);
       }
     };
 
@@ -382,9 +397,9 @@ export const ExpandableSearch: React.FC<ExpandableSearchProps> = ({
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
-        setIsExpanded((prev) => !prev);
+        setExpanded((prev) => !prev);
       } else if (e.key === 'Escape' && isExpanded) {
-        setIsExpanded(false);
+        setExpanded(false);
       }
     };
 
@@ -402,7 +417,7 @@ export const ExpandableSearch: React.FC<ExpandableSearchProps> = ({
 
   const handleItemClick = (item: SearchResultItem) => {
     item.onSelect();
-    setIsExpanded(false);
+    setExpanded(false);
     setQuery('');
   };
 
@@ -477,14 +492,14 @@ export const ExpandableSearch: React.FC<ExpandableSearchProps> = ({
       <div
         className="expandable-search__bar"
         onClick={() => {
-          if (!isExpanded) setIsExpanded(true);
+          if (!isExpanded) setExpanded(true);
         }}
       >
         <button
           type="button"
           onClick={(e) => {
             e.stopPropagation();
-            setIsExpanded((prev) => !prev);
+            setExpanded((prev) => !prev);
           }}
           className="expandable-search__trigger-btn"
           aria-label={isExpanded ? 'Close Search' : 'Open Search'}
