@@ -2,8 +2,6 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "cleanUrls": true,
-  "trailingSlash": false,
   "redirects": [
     {
       "source": "/film-submission",
@@ -22,15 +20,7 @@
       "destination": "/api/$1"
     },
     {
-      "source": "/film-fest",
-      "destination": "/film-fest/index.html"
-    },
-    {
-      "source": "/film-fest/",
-      "destination": "/film-fest/index.html"
-    },
-    {
-      "source": "/(.*)",
+      "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
   ],
