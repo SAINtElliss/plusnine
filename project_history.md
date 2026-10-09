@@ -2,6 +2,26 @@
 
 ## Session Log
 
+### 2026-10-09 — HTML5 Path-Based Routing Migration & Vercel Nested Route Support (Zero Hash)
+- **Eliminated Hash Routing (`src/App.tsx`)**:
+  - Replaced legacy `window.location.hash` and `hashchange` listener with native HTML5 History API (`window.location.pathname`, `popstate`, `pushState`, `replaceState`).
+  - Added seamless legacy hash auto-migration (`/#/work` → `/work`, `/#/people/:id` → `/people/:id`) ensuring bookmarks and legacy URLs cleanly normalize without reload.
+  - Preserved intentional in-page anchors (`#roadmap`) on the 4K Film Festival page with smooth scrolling.
+- **Deep-Linking & Internal Navigation Standardization**:
+  - `PeoplePage.tsx`: Converted member detail deep-linking to clean nested pathnames (`/people/:id`) and synchronized `selectedMember` state on `popstate`.
+  - `FloatingDock.tsx`, `Colophon.tsx`, `RecentlySection.tsx`, `CollectiveSection.tsx`, `UpcomingSection.tsx`, `HeroVideo.tsx`, `ExpandableSearch.tsx`: Standardized all navigation links and handlers to clean pathnames (`/`, `/work`, `/events`, `/people`, `/about`, `/film-fest`, `/as-we-are`).
+  - Completely eliminated the `/film-fest#/people` compound URL anomaly.
+- **Vercel Edge Pre-Rendering & Nested Route Delivery (`scripts/generate-meta-pages.js`, `vercel.json`)**:
+  - Expanded pre-render build step to generate static HTML shells for `/work`, `/events`, `/people`, `/about`, `/as-we-are`, `/film-fest`, and all 11 individual member routes (`/people/:id`).
+  - Configured SPA rewrite rule `/((?!api/).*)` → `/index.html` in `vercel.json` for fallback.
+  - Verified live production HTTP status across all routes via `curl.exe`: all return `200 OK` with zero 404s on direct visit or refresh.
+- **Verification & Deployment**:
+  - `npm run typecheck` passed (0 errors).
+  - `npm run build` passed.
+  - Automated Chrome DevTools Protocol verified direct visits, link clicks, member profile deep-linking, legacy hash auto-migration, and in-page anchor scrolling.
+  - Deployed live to Vercel production: https://plusnine.vercel.app.
+  - Pushed to GitHub repository: https://github.com/SAINtElliss/plusnine (commits `cd25730` & `37af3fa`).
+
 ### 2026-10-09 — Member Profiles Update (Ellis: Web Design & Regina: Creative Director)
 - **Ellis Profile Updates (`src/data/members.ts`)**:
   - Added "Web Design" to creative disciplines (`['Graphic Design', 'Web Design', 'Social Media Management', 'Video Editing', 'Music']`).
