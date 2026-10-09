@@ -6,12 +6,12 @@
     {
       "source": "/film-submission",
       "destination": "https://submit.plusnine.org",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/film-submission/",
       "destination": "https://submit.plusnine.org",
-      "permanent": true
+      "permanent": false
     }
   ],
   "rewrites": [
