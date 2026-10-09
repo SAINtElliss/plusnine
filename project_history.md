@@ -28,8 +28,7 @@
   - Initialized Git repository, staged all project assets and source files.
   - Created private GitHub repository: https://github.com/JimiR3d/plusnine.
   - Pushed main branch with entire codebase, public media, audio, and visual assets.
-  - Invited collaborator `SAINtElliss` with full write/push access: https://github.com/JimiR3d/plusnine/invitations.
-  - Initiated ownership transfer of the repository to `SAINtElliss` (pending their acceptance).
+  - Transferred repository ownership to `SAINtElliss`: https://github.com/SAINtElliss/plusnine.
 
 ### 2026-10-08 — Mobile Hero 85–90vh Cinematic Composition & Removal of Back to Overview
 - **Mobile Homepage Hero Cinematic Composition (`main.css` & `HeroVideo.tsx`)**:
