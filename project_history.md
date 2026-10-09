@@ -2,6 +2,29 @@
 
 ## Session Log
 
+### 2026-10-09 — Homepage SEO Update & Categorized Site-Wide Search
+- **Homepage SEO & Social Sharing Previews (`index.html`, `src/App.tsx`)**:
+  - Updated title to exactly `PlusNine | Culture & Community` for browser tabs, SEO title, Open Graph (`og:title`), and Twitter Cards (`twitter:title`).
+  - Updated description to: `"An independent collective bringing people together through art, music, film, fashion, and shared cultural experiences."` for `<meta name="description">`, `og:description`, and `twitter:description`.
+  - Preserved existing PlusNine logo preview image (`og-homepage.png`) unchanged.
+- **Categorized Site-Wide Search (`ExpandableSearch.tsx`, `FloatingDock.tsx`, `main.css`)**:
+  - Expanded search beyond Work archive into a site-wide search engine covering 4 distinct categories:
+    1. **Work**: Original films, campaigns, editorials, and recaps (`PROJECTS_DATA` with title, category, year, client, description, tags, credits).
+    2. **Events**: 4K Film Festival 2026 (The Roxy Theatre, free admission passes, roadmap) and past releases (AS WE ARE launch).
+    3. **People**: 11 collective members (Lucy, Ezinne, Oliseh, Alfred, Denzel, Ellis, Nani, Nicole, Philip, Timi, Jimi) with roles, disciplines, and creative practice.
+    4. **Pages**: About PlusNine, Work Archive, Events & Gatherings, People Directory, 4K Film Festival Page, Film Submission (`/film-submission` redirect), and PlusNine Magazine.
+  - Organized results into labeled categories (`WORK`, `EVENTS`, `PEOPLE`, `PAGES`) with match count badges.
+  - Case-insensitive, partial keyword matching across all real content.
+  - Directly routes on selection to project, event, member profile (`#/people/${id}`), or external link (`/film-submission`).
+  - Styled with a dark glassmorphism dropdown matching PlusNine visual identity.
+- **Verification & Deployment**:
+  - `npm run typecheck` passed (0 errors).
+  - `npm run build` passed in 2.38s.
+  - Verified in real browser with browser subagent: verified title in tab and live HTML, tested search for "film", "lucy", and "submission", verified navigation to Lucy's profile, and captured screenshots.
+  - Deployed to Vercel production: https://plusnine.vercel.app and https://www.plusnine.org.
+  - Pushed to GitHub repository: https://github.com/SAINtElliss/plusnine (commit `8d81805`).
+
+
 ### 2026-10-09 — People Section Clean-Up & Member Roles Update
 - **Removed Member Profile Navigation & Contact Buttons (`PeoplePage.tsx`)**:
   - Removed "CONNECT WITH [NAME]" email CTA buttons from all individual member profile pages.
