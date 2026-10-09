@@ -136,7 +136,7 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({
 
         {/* Top Right: Search + Magazine + Contact + Mobile Hamburger */}
         <div className="site-header__right">
-          <ExpandableSearch onSelectProject={onSelectProject} />
+          <ExpandableSearch onSelectProject={onSelectProject} onNavigate={onNavigate} />
 
           <a
             href="https://www.instagram.com/plusnine.mag/"

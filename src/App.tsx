@@ -95,11 +95,11 @@ export const App: React.FC = () => {
       updateMetaTag('meta[name="twitter:image"]', 'content', image);
       updateMetaTag('meta[name="twitter:image:alt"]', 'content', imageAlt);
     } else {
-      const title = 'PlusNine — An Independent Creative Collective';
-      const description = 'A collective of creatives shaping culture through film, music, fashion, editorial, art, and shared experiences.';
+      const title = 'PlusNine | Culture & Community';
+      const description = 'An independent collective bringing people together through art, music, film, fashion, and shared cultural experiences.';
       const url = 'https://www.plusnine.org/';
       const image = 'https://www.plusnine.org/images/og-homepage.png';
-      const imageAlt = 'PlusNine — An Independent Creative Collective';
+      const imageAlt = 'PlusNine | Culture & Community';
 
       document.title = title;
       updateMetaTag('meta[name="description"]', 'content', description);

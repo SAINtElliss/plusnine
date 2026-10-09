@@ -1,45 +1,366 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Search, X, ArrowRight } from 'lucide-react';
-import { PROJECTS_DATA, Project } from '../../data/projects';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
+import {
+  Search,
+  X,
+  ArrowRight,
+  ArrowUpRight,
+  Film,
+  Calendar,
+  Users,
+  Info,
+  BookOpen,
+  Send
+} from 'lucide-react';
+import { PROJECTS_DATA, Project, PageType } from '../../data/projects';
+import { PLUSNINE_MEMBERS } from '../../data/members';
 
 interface ExpandableSearchProps {
   onSelectProject?: (project: Project) => void;
+  onNavigate?: (page: PageType) => void;
+}
+
+type SearchCategory = 'Work' | 'Events' | 'People' | 'Pages';
+
+interface SearchResultItem {
+  id: string;
+  category: SearchCategory;
+  title: string;
+  subtitle: string;
+  snippet?: string;
+  image?: string;
+  icon?: 'film' | 'calendar' | 'users' | 'info' | 'magazine' | 'send';
+  isExternal?: boolean;
+  keywords: string[];
+  onSelect: () => void;
 }
 
 export const ExpandableSearch: React.FC<ExpandableSearchProps> = ({
-  onSelectProject
+  onSelectProject,
+  onNavigate
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState<Project[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Filter projects dynamically
-  useEffect(() => {
-    if (!query.trim()) {
-      setResults([]);
-      return;
-    }
+  // Compile comprehensive site-wide searchable database
+  const allSearchItems = useMemo<SearchResultItem[]>(() => {
+    const items: SearchResultItem[] = [];
 
-    const q = query.toLowerCase();
-    const matched = PROJECTS_DATA.filter((p) => {
-      return (
-        p.title.toLowerCase().includes(q) ||
-        p.category.toLowerCase().includes(q) ||
-        p.client.toLowerCase().includes(q) ||
-        p.description.toLowerCase().includes(q) ||
-        (p.credits &&
-          p.credits.some(
-            (c) =>
-              c.label.toLowerCase().includes(q) ||
-              c.value.toLowerCase().includes(q)
-          ))
-      );
+    // 1. WORK ARCHIVE (Projects, Films, Editorials, Recaps)
+    PROJECTS_DATA.forEach((project) => {
+      items.push({
+        id: `work-${project.id}`,
+        category: 'Work',
+        title: project.title,
+        subtitle: `${project.category} · ${project.year}`,
+        snippet: project.description,
+        image: project.image,
+        icon: 'film',
+        keywords: [
+          project.title,
+          project.category,
+          project.client,
+          project.description,
+          project.year,
+          ...(project.tags || []),
+          ...(project.credits ? project.credits.map((c) => `${c.label} ${c.value}`) : [])
+        ],
+        onSelect: () => {
+          if (project.id === 'as-we-are') {
+            if (onNavigate) onNavigate('as-we-are');
+            else window.location.hash = '#/as-we-are';
+          } else if (onSelectProject) {
+            onSelectProject(project);
+          } else {
+            if (onNavigate) onNavigate('work');
+            else window.location.hash = '#/work';
+          }
+        }
+      });
     });
 
-    setResults(matched);
-  }, [query]);
+    // 2. EVENTS (4K Film Festival 2026, Past Releases & Showcases)
+    items.push({
+      id: 'event-4k-film-fest',
+      category: 'Events',
+      title: '4K Film Festival 2026',
+      subtitle: 'Nov 12, 2026 · The Roxy Theatre, Edmonton',
+      snippet: 'A celebration of African & diaspora storytelling through film. Screenings, roadmap timetable, and free admission.',
+      image: '/images/events/4k_film_festival_promo.png',
+      icon: 'calendar',
+      keywords: [
+        '4k film festival',
+        'film festival',
+        'roxy theatre',
+        'edmonton',
+        'november 12 2026',
+        'nov 12 2026',
+        'free admission',
+        'reserve pass',
+        'roadmap',
+        'screenings',
+        'african diaspora',
+        'gatherings',
+        'cinema'
+      ],
+      onSelect: () => {
+        if (onNavigate) onNavigate('film-fest');
+        else window.location.hash = '#/film-fest';
+      }
+    });
+
+    items.push({
+      id: 'event-as-we-are-release',
+      category: 'Events',
+      title: 'AS WE ARE (Digital Publication Launch)',
+      subtitle: 'Feb 17, 2025 · Online Release',
+      snippet: 'Online editorial publication launch with Vernacular Magazine reflecting on ordinary rhythms of Black life.',
+      image: '/images/projects/as_we_are.jpg',
+      icon: 'calendar',
+      keywords: [
+        'as we are',
+        'digital release',
+        'online publication',
+        'vernacular magazine',
+        'launch',
+        'february 17 2025',
+        'feb 17 2025',
+        'editorial launch'
+      ],
+      onSelect: () => {
+        if (onNavigate) onNavigate('as-we-are');
+        else window.location.hash = '#/as-we-are';
+      }
+    });
+
+    // 3. PEOPLE (11-Member Collective Roster)
+    PLUSNINE_MEMBERS.forEach((member) => {
+      items.push({
+        id: `person-${member.id}`,
+        category: 'People',
+        title: member.name,
+        subtitle: member.role + (member.secondaryIdentity ? ` · ${member.secondaryIdentity}` : ''),
+        snippet: member.creativeIdentity || (member.disciplines ? member.disciplines.join(', ') : ''),
+        image: member.image,
+        icon: 'users',
+        keywords: [
+          member.name,
+          member.role,
+          member.secondaryIdentity || '',
+          ...(member.disciplines || []),
+          member.creativeIdentity || '',
+          member.bio || ''
+        ],
+        onSelect: () => {
+          window.location.hash = `#/people/${member.id}`;
+          if (onNavigate) onNavigate('people');
+        }
+      });
+    });
+
+    // 4. PAGES (About, Work, Events, People, Film Festival, Film Submission, Magazine)
+    items.push({
+      id: 'page-about',
+      category: 'Pages',
+      title: 'About PlusNine',
+      subtitle: 'Studio Manifesto & Practice',
+      snippet: 'Independent creative development studio, film production collective, and cultural magazine platform based in Edmonton.',
+      icon: 'info',
+      keywords: [
+        'about',
+        'about us',
+        'manifesto',
+        'studio',
+        'edmonton',
+        'collective',
+        'practices',
+        'mission',
+        'creative development'
+      ],
+      onSelect: () => {
+        if (onNavigate) onNavigate('about');
+        else window.location.hash = '#/about';
+      }
+    });
+
+    items.push({
+      id: 'page-work',
+      category: 'Pages',
+      title: 'Work Archive',
+      subtitle: 'Portfolio of Original Productions',
+      snippet: 'Asymmetrical numbered archive of films, campaigns, editorials, and visual culture projects.',
+      icon: 'film',
+      keywords: [
+        'work',
+        'work archive',
+        'projects',
+        'portfolio',
+        'productions',
+        'films',
+        'editorials',
+        'campaigns'
+      ],
+      onSelect: () => {
+        if (onNavigate) onNavigate('work');
+        else window.location.hash = '#/work';
+      }
+    });
+
+    items.push({
+      id: 'page-events',
+      category: 'Pages',
+      title: 'Events & Gatherings',
+      subtitle: 'Showcases, Screenings & Pop-ups',
+      snippet: 'Screenings, parties, pop-ups, showcases, and creative community cultural gatherings.',
+      icon: 'calendar',
+      keywords: [
+        'events',
+        'gatherings',
+        'showcases',
+        'parties',
+        'pop-ups',
+        'screenings',
+        'calendar'
+      ],
+      onSelect: () => {
+        if (onNavigate) onNavigate('events');
+        else window.location.hash = '#/events';
+      }
+    });
+
+    items.push({
+      id: 'page-people',
+      category: 'Pages',
+      title: 'People Directory',
+      subtitle: 'Collective Members & Collaborators',
+      snippet: 'Meet the 11 multidisciplinary creators, directors, sound engineers, and producers behind PlusNine.',
+      icon: 'users',
+      keywords: [
+        'people',
+        'people directory',
+        'collective roster',
+        'members',
+        'collaborators',
+        'team'
+      ],
+      onSelect: () => {
+        if (onNavigate) onNavigate('people');
+        else window.location.hash = '#/people';
+      }
+    });
+
+    items.push({
+      id: 'page-filmfest',
+      category: 'Pages',
+      title: '4K Film Festival Page',
+      subtitle: 'Programme, Roadmap & Passes',
+      snippet: 'Official festival programme, timetable roadmap, passes, and venue details at The Roxy Theatre.',
+      icon: 'film',
+      keywords: [
+        '4k film festival',
+        'festival page',
+        'film fest page',
+        'programme',
+        'schedule roadmap',
+        'passes'
+      ],
+      onSelect: () => {
+        if (onNavigate) onNavigate('film-fest');
+        else window.location.hash = '#/film-fest';
+      }
+    });
+
+    items.push({
+      id: 'page-film-submission',
+      category: 'Pages',
+      title: 'Film Submission',
+      subtitle: 'Wix Form · submit.plusnine.org',
+      snippet: 'Submit independent films, shorts, and treatments to the 4K Film Festival and PlusNine co-productions.',
+      icon: 'send',
+      isExternal: true,
+      keywords: [
+        'film submission',
+        'submission',
+        'submit film',
+        'submit your film',
+        'call for entries',
+        'filmmakers',
+        'treatment submission',
+        'form'
+      ],
+      onSelect: () => {
+        // Uses the existing /film-submission redirect
+        window.location.href = '/film-submission';
+      }
+    });
+
+    items.push({
+      id: 'page-magazine',
+      category: 'Pages',
+      title: 'PlusNine Magazine',
+      subtitle: 'Editorial Publication (@plusnine.mag)',
+      snippet: 'Print and digital publication championing culture, visual essays, and editorial storytelling.',
+      icon: 'magazine',
+      isExternal: true,
+      keywords: [
+        'magazine',
+        'plusnine magazine',
+        'plusnine mag',
+        'vernacular',
+        'editorial',
+        'publication',
+        'instagram',
+        'visual culture'
+      ],
+      onSelect: () => {
+        window.open('https://www.instagram.com/plusnine.mag/', '_blank', 'noopener,noreferrer');
+      }
+    });
+
+    return items;
+  }, [onNavigate, onSelectProject]);
+
+  // Case-insensitive, partial keyword matching grouped by category
+  const { groupedResults, totalMatches } = useMemo(() => {
+    const trimmed = query.trim().toLowerCase();
+    if (!trimmed) {
+      return {
+        groupedResults: { Work: [], Events: [], People: [], Pages: [] },
+        totalMatches: 0
+      };
+    }
+
+    const terms = trimmed.split(/\s+/).filter(Boolean);
+
+    const matches = allSearchItems.filter((item) => {
+      return terms.every((term) => {
+        return (
+          item.title.toLowerCase().includes(term) ||
+          item.subtitle.toLowerCase().includes(term) ||
+          (item.snippet && item.snippet.toLowerCase().includes(term)) ||
+          item.category.toLowerCase().includes(term) ||
+          item.keywords.some((kw) => kw.toLowerCase().includes(term))
+        );
+      });
+    });
+
+    const groups: Record<SearchCategory, SearchResultItem[]> = {
+      Work: [],
+      Events: [],
+      People: [],
+      Pages: []
+    };
+
+    matches.forEach((item) => {
+      groups[item.category].push(item);
+    });
+
+    return {
+      groupedResults: groups,
+      totalMatches: matches.length
+    };
+  }, [allSearchItems, query]);
 
   // Click outside to collapse
   useEffect(() => {
@@ -76,18 +397,76 @@ export const ExpandableSearch: React.FC<ExpandableSearchProps> = ({
       inputRef.current.focus();
     } else {
       setQuery('');
-      setResults([]);
     }
   }, [isExpanded]);
 
-  const handleSelect = (project: Project) => {
-    if (onSelectProject) {
-      onSelectProject(project);
-    } else {
-      const el = document.getElementById('works');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleItemClick = (item: SearchResultItem) => {
+    item.onSelect();
     setIsExpanded(false);
+    setQuery('');
+  };
+
+  const CATEGORIES: SearchCategory[] = ['Work', 'Events', 'People', 'Pages'];
+
+  const renderIcon = (item: SearchResultItem) => {
+    if (item.image) {
+      if (item.category === 'People') {
+        return (
+          <img
+            src={item.image}
+            alt={item.title}
+            className="search-result-item__avatar"
+          />
+        );
+      }
+      return (
+        <img
+          src={item.image}
+          alt={item.title}
+          className="search-result-item__thumb"
+        />
+      );
+    }
+
+    switch (item.icon) {
+      case 'calendar':
+        return (
+          <div className="search-result-item__icon-box">
+            <Calendar size={14} />
+          </div>
+        );
+      case 'users':
+        return (
+          <div className="search-result-item__icon-box">
+            <Users size={14} />
+          </div>
+        );
+      case 'send':
+        return (
+          <div className="search-result-item__icon-box">
+            <Send size={14} />
+          </div>
+        );
+      case 'magazine':
+        return (
+          <div className="search-result-item__icon-box">
+            <BookOpen size={14} />
+          </div>
+        );
+      case 'info':
+        return (
+          <div className="search-result-item__icon-box">
+            <Info size={14} />
+          </div>
+        );
+      case 'film':
+      default:
+        return (
+          <div className="search-result-item__icon-box">
+            <Film size={14} />
+          </div>
+        );
+    }
   };
 
   return (
@@ -118,9 +497,9 @@ export const ExpandableSearch: React.FC<ExpandableSearchProps> = ({
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search archive, films, issues..."
+          placeholder="Search work, events, people, pages..."
           className="expandable-search__input"
-          aria-label="Search archive"
+          aria-label="Search site"
         />
 
         {query && (
@@ -135,40 +514,79 @@ export const ExpandableSearch: React.FC<ExpandableSearchProps> = ({
         )}
       </div>
 
-      {/* Instant Search Results Dropdown */}
+      {/* Site-Wide Search Results Dropdown */}
       {isExpanded && query.trim().length > 0 && (
         <div className="expandable-search__results">
-          {results.length > 0 ? (
+          {totalMatches > 0 ? (
             <div className="expandable-search__results-list">
-              <div className="search-results__header">
-                Archive Matches ({results.length})
+              <div className="search-results__global-header">
+                <span>Site Search Results</span>
+                <span className="search-results__count-badge">
+                  {totalMatches} {totalMatches === 1 ? 'match' : 'matches'}
+                </span>
               </div>
-              {results.map((project) => (
-                <button
-                  key={project.id}
-                  onClick={() => handleSelect(project)}
-                  className="search-result-item"
-                >
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="search-result-item__thumb"
-                  />
-                  <div className="search-result-item__info">
-                    <div className="search-result-item__title">
-                      {project.title}
+
+              {CATEGORIES.map((category) => {
+                const categoryList = groupedResults[category];
+                if (!categoryList || categoryList.length === 0) return null;
+
+                return (
+                  <div key={category} className="search-category-section">
+                    <div className="search-category-header">
+                      <span className="search-category-title">{category}</span>
+                      <span className="search-category-count">
+                        {categoryList.length}
+                      </span>
                     </div>
-                    <div className="search-result-item__category">
-                      {project.category} &middot; {project.year}
+
+                    <div className="search-category-items">
+                      {categoryList.map((item) => (
+                        <button
+                          key={item.id}
+                          type="button"
+                          onClick={() => handleItemClick(item)}
+                          className="search-result-item"
+                        >
+                          <div className="search-result-item__visual">
+                            {renderIcon(item)}
+                          </div>
+
+                          <div className="search-result-item__info">
+                            <div className="search-result-item__title-row">
+                              <span className="search-result-item__title">
+                                {item.title}
+                              </span>
+                              {item.isExternal && (
+                                <ArrowUpRight
+                                  size={11}
+                                  className="search-result-item__external-icon"
+                                />
+                              )}
+                            </div>
+                            <div className="search-result-item__subtitle">
+                              {item.subtitle}
+                            </div>
+                            {item.snippet && (
+                              <div className="search-result-item__snippet">
+                                {item.snippet}
+                              </div>
+                            )}
+                          </div>
+
+                          <ArrowRight
+                            size={13}
+                            className="search-result-item__arrow"
+                          />
+                        </button>
+                      ))}
                     </div>
                   </div>
-                  <ArrowRight size={14} className="search-result-item__arrow" />
-                </button>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <div className="search-results__empty">
-              No matching productions for &ldquo;{query}&rdquo;
+              No results found for &ldquo;{query}&rdquo;
             </div>
           )}
         </div>
@@ -176,3 +594,5 @@ export const ExpandableSearch: React.FC<ExpandableSearchProps> = ({
     </div>
   );
 };
+
+export default ExpandableSearch;
