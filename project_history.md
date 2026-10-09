@@ -2,26 +2,22 @@
 
 ## Session Log
 
-### 2026-10-09 — Film Submission Permanent Server-Side (308) Redirect & Site-Wide Link Routing
-- **Vercel Server-Side 308 Redirect (`vercel.json`)**:
-  - Configured permanent server-side redirect rules in `vercel.json` routing both `/film-submission` and `/film-submission/` to `https://submit.plusnine.org` (hosting the Wix submission form) with `"permanent": true`.
-  - Emits native HTTP 308 Permanent Redirect at the Vercel Edge network across all active custom domains (`www.plusnine.org`, `plusnine.org`, `plusnine.vercel.app`), preserving request methods, headers, and query parameters.
-- **Client Hash Route Safeguard (`src/App.tsx`)**:
-  - Added hash routing fallback in `parseHash()` routing any client navigation to `#/film-submission` directly to `window.location.href = '/film-submission'`, triggering the edge 308 redirect immediately.
-- **Site-Wide Film Submission Entry Points**:
-  - `src/components/pages/FilmFestPage.tsx`: Added secondary action button linking to `/film-submission` ("Submit Your Film") in Card 2 of Venue & Admission.
-  - `src/components/pages/EventsPage.tsx`: Added secondary action link to `/film-submission` ("Film Submission") on the featured 4K Film Festival card.
-  - `src/components/pages/PeoplePage.tsx`: Added `/film-submission` action button ("Submit Film") in the Roster Collaboration Open Call section alongside "Submit Treatment".
-  - `src/components/footer/Colophon.tsx`: Added signal orange `Film Submission •` entry under the `INDEX` column in the global footer.
-  - `src/components/nav/HamburgerDrawer.tsx`: Added dedicated `FILM SUBMISSION` item with signal orange active indicator in the mobile drawer navigation.
-  - `src/styles/main.css`: Added responsive styles for `.events-btn-submission`, `.people-join-actions`, and `.people-join-btn--secondary`.
+### 2026-10-09 — Route-Specific Temporary 307 Redirect for /film-submission & Site Route Verification
+- **Route-Specific Temporary 307 Redirect (`vercel.json`)**:
+  - Replaced `"permanent": true` with `"permanent": false` in `vercel.json` for both `/film-submission` and `/film-submission/`.
+  - Configured edge routing to emit an `HTTP 307 Temporary Redirect` to prevent aggressive browser caching while preserving request body and method.
+  - Confirmed only `/film-submission` and `/film-submission/` point to `https://submit.plusnine.org`.
+  - Confirmed absence of any wildcard, catch-all, or domain-wide redirects to Wix in `vercel.json`, headers, or client SPA routing.
+- **Apex and Route Integrity Verification**:
+  - Verified `https://plusnine.org` preserves the apex-to-www redirect (`308 Permanent Redirect` → `https://www.plusnine.org/`).
+  - Verified `https://www.plusnine.org` and all child routes (`/`, `/work`, `/events`, `/people`, `/about`, `/film-fest`, `/as-we-are`) return `200 OK` and cleanly serve the PlusNine website on Vercel without redirecting to Wix.
+  - Verified in real browser via browser subagent: `https://www.plusnine.org` renders the full creative studio platform and `https://www.plusnine.org/film-submission` routes to `https://submit.plusnine.org`.
 - **Verification & Deployment**:
   - `npm run typecheck` passed (0 errors).
-  - `npm run build` passed in 2.61s.
-  - Verified live HTTP response headers via fetch: `GET https://www.plusnine.org/film-submission` returns `308 Permanent Redirect` with `Location: https://submit.plusnine.org`.
-  - Verified in real browser with DevTools: all submission links point to `/film-submission`.
+  - `npm run build` passed in 2.33s.
   - Deployed to Vercel production: https://plusnine.vercel.app.
-  - Pushed to GitHub repository: https://github.com/SAINtElliss/plusnine (commit `7c5608b`).
+  - Pushed to GitHub repository: https://github.com/SAINtElliss/plusnine (commits `2bd90dc` & auto-deployment to `saint-ellis` production).
+
 
 ### 2026-10-09 — Root Container Restoration & Defensive Mounting Safeguard
 - **Root Cause**:
