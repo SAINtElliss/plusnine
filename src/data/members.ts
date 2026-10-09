@@ -77,16 +77,16 @@ export const PLUSNINE_MEMBERS: Member[] = [
   {
     id: 'ezinne',
     name: 'Ezinne',
-    role: 'Co-Editor-in-Chief & Outreach',
+    role: 'Co-Editor-in-Chief',
     secondaryIdentity: 'Event Host',
-    disciplines: ['Editorial Direction', 'Outreach', 'Event Hosting'],
+    disciplines: ['Editorial Direction', 'Event Hosting'],
     creativeIdentity: 'Co-Editor-in-Chief and event producer; hosts and curates independent cultural gatherings and showcases across the UK.'
   },
   {
     id: 'lucy',
     name: 'Lucy',
-    role: 'Magazine & Editorial',
-    disciplines: ['Magazine Publishing', 'Editorial Direction', 'Writing'],
+    role: 'Editorial & Outreach',
+    disciplines: ['Editorial Direction', 'Outreach', 'Writing'],
     creativeIdentity: 'Print and digital magazine editor developing editorial publications, cultural commentary, and curated storytelling.'
   },
   {

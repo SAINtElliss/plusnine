@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, ArrowUpRight, Film, Mail } from 'lucide-react';
+import { ArrowUpRight, Film, Mail } from 'lucide-react';
 import { PageType } from '../../data/projects';
 import { PLUSNINE_MEMBERS, Member } from '../../data/members';
 
@@ -38,29 +38,11 @@ export const PeoplePage: React.FC<PeoplePageProps> = ({ onNavigate: _onNavigate 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleBackToDirectory = () => {
-    setSelectedMember(null);
-    window.location.hash = '#/people';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
     <div className="page-view page-view--people">
       {/* Page Header (Warm Paper) */}
       <section className="page-header-section page-header-section--paper">
         <div className="container">
-          {selectedMember && (
-            <div className="page-breadcrumbs">
-              <button
-                type="button"
-                onClick={handleBackToDirectory}
-                className="page-back-btn"
-              >
-                <ArrowLeft size={14} />
-                <span>Back to People Directory</span>
-              </button>
-            </div>
-          )}
 
           <div className="page-title-block">
             <h1 className="page-hero-title">
@@ -78,17 +60,6 @@ export const PeoplePage: React.FC<PeoplePageProps> = ({ onNavigate: _onNavigate 
       {selectedMember ? (
         <section className="people-profile-section">
           <div className="container">
-            <div className="people-profile-nav">
-              <button
-                type="button"
-                onClick={handleBackToDirectory}
-                className="page-back-btn"
-              >
-                <ArrowLeft size={14} />
-                <span>Back to People</span>
-              </button>
-            </div>
-
             <div className="people-profile-card">
               {/* Media Column: Neutral Placeholder Circle */}
               <div className="people-profile-media-col">
@@ -248,17 +219,7 @@ export const PeoplePage: React.FC<PeoplePageProps> = ({ onNavigate: _onNavigate 
                   </div>
                 )}
 
-                {/* Connect / Collaborate CTA */}
-                <div className="people-profile-actions">
-                  <a
-                    href={`mailto:plus9ineent@gmail.com?subject=Collaborate with ${selectedMember.name}`}
-                    className="people-join-btn"
-                  >
-                    <Mail size={15} />
-                    <span>Connect with {selectedMember.name}</span>
-                    <ArrowUpRight size={14} />
-                  </a>
-                </div>
+
               </div>
             </div>
           </div>
