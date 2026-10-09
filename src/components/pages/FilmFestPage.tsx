@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowDown, ArrowUpRight, Calendar, Film, MapPin, Ticket } from 'lucide-react';
 import { PageType } from '../../data/projects';
 import { FestivalRoadmap } from '../filmfest/FestivalRoadmap';
+import { FestivalCountdown } from '../filmfest/FestivalCountdown';
 import { useEventbriteModal, initEventbriteModalTrigger, isEventbriteInitialized } from '../../utils/eventbrite';
 
 interface FilmFestPageProps {
@@ -12,6 +13,29 @@ interface FilmFestPageProps {
 export const FilmFestPage: React.FC<FilmFestPageProps> = ({ onNavigate: _onNavigate }) => {
   // Hook to connect the Reserve Free Pass button to Eventbrite modal checkout
   useEventbriteModal('filmfest-eb-trigger-pass');
+
+  // Track visibility of the #roadmap section to auto-hide the floating button
+  const [isRoadmapVisible, setIsRoadmapVisible] = useState(false);
+
+  useEffect(() => {
+    const roadmapEl = document.getElementById('roadmap');
+    if (!roadmapEl) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        // Automatically hide button whenever any portion of #roadmap is on screen
+        setIsRoadmapVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0,
+        rootMargin: '0px 0px -40px 0px'
+      }
+    );
+
+    observer.observe(roadmapEl);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="page-view page-view--filmfest">
@@ -116,17 +140,8 @@ export const FilmFestPage: React.FC<FilmFestPageProps> = ({ onNavigate: _onNavig
 
           </div>
 
-          {/* Centered VIEW ROADMAP action */}
-          <div className="fest-editorial-roadmap-cue">
-            <button
-              type="button"
-              onClick={() => document.getElementById('roadmap')?.scrollIntoView({ behavior: 'smooth' })}
-              className="fest-editorial-roadmap-btn"
-            >
-              <span>View Roadmap</span>
-              <ArrowDown size={14} />
-            </button>
-          </div>
+          {/* Festival Live Countdown (replaces the original in-flow View Roadmap position) */}
+          <FestivalCountdown />
         </div>
       </section>
 
@@ -150,6 +165,17 @@ export const FilmFestPage: React.FC<FilmFestPageProps> = ({ onNavigate: _onNavig
           <FestivalRoadmap />
         </div>
       </section>
+
+      {/* Floating Centered VIEW ROADMAP Action Button */}
+      <button
+        type="button"
+        onClick={() => document.getElementById('roadmap')?.scrollIntoView({ behavior: 'smooth' })}
+        className={`fest-floating-roadmap-btn ${isRoadmapVisible ? 'fest-floating-roadmap--hidden' : ''}`}
+        aria-label="Scroll to Festival Roadmap"
+      >
+        <span className="fest-floating-roadmap-btn__text">View Roadmap</span>
+        <ArrowDown size={14} className="fest-floating-roadmap-btn__icon" />
+      </button>
     </div>
   );
 };

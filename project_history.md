@@ -2,6 +2,27 @@
 
 ## Session Log
 
+### 2026-10-09 — 4K Film Festival Page Floating VIEW ROADMAP Button & Live Countdown
+- **Floating VIEW ROADMAP Action Button (`FilmFestPage.tsx`, `main.css`)**:
+  - Relocated the "VIEW ROADMAP" button from the static document flow into a fixed floating position centered horizontally near the bottom of the viewport (`bottom: max(24px, calc(env(safe-area-inset-bottom, 0px) + 20px))`).
+  - Added a spring entrance animation (`@keyframes floatRoadmapEnter`) when mounting the festival page.
+  - Added an ambient heartbeat pulse animation (`@keyframes floatRoadmapPulse`) cycling every 4.5 seconds with signal-orange glow to encourage interaction.
+  - Implemented an `IntersectionObserver` targeting `#roadmap` to automatically hide the floating button via smooth slide-down and fade-out whenever any part of the Roadmap section is visible on screen.
+  - Ensured the button smoothly fades and slides back into view whenever the user scrolls away from the Roadmap section in either direction (upwards into the venue/hero or downwards into the colophon footer).
+  - Maintained full reduced-motion accessibility (`@media (prefers-reduced-motion: reduce)`) disabling pulse and transform animations.
+- **Editorial Festival Countdown Component (`FestivalCountdown.tsx`, `main.css`)**:
+  - Replaced the original static in-flow VIEW ROADMAP button position with a dedicated live countdown to November 12, 2026, calculated against Edmonton local time (`America/Edmonton` / MST UTC-7).
+  - Displays tabular **DAYS : HOURS : MINUTES : SECONDS** updating every 1000ms, with blinking signal-orange separator colons and a live status indicator dot.
+  - Styled with PlusNine typography (Arial Black uppercase display, Helvetica body tags) and warm paper glassmorphism (`backdrop-filter: blur(10px)`).
+  - Does not invent an unconfigured start time; targets the beginning of November 12, 2026 in Edmonton (00:00:00 MST).
+  - Maintained all existing content, layouts, venue cards, and roadmap timetable stops unchanged.
+- **Verification & Deployment**:
+  - `npm run typecheck` passed (0 errors).
+  - `npm run build` passed in 2.72s.
+  - Verified in real browser with DevTools: entrance animation, pulse, smooth scroll to `#roadmap`, auto-hiding when `#roadmap` intersects, and reappearance when scrolling away.
+  - Deployed to Vercel production: https://plusnine.vercel.app.
+  - Pushed to GitHub repository: https://github.com/SAINtElliss/plusnine.
+
 ### 2026-10-09 — Route-Specific Temporary 307 Redirect for /film-submission & Site Route Verification
 - **Route-Specific Temporary 307 Redirect (`vercel.json`)**:
   - Replaced `"permanent": true` with `"permanent": false` in `vercel.json` for both `/film-submission` and `/film-submission/`.

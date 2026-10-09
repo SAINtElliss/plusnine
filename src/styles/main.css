@@ -6767,19 +6767,192 @@ img, video {
   box-shadow: 0 4px 14px rgba(255, 59, 22, 0.24);
 }
 
-/* Centered View Roadmap Button */
-.fest-editorial-roadmap-cue {
-  margin-top: clamp(28px, 4vw, 42px);
+/* ==========================================================================
+   FESTIVAL COUNTDOWN (Warm paper editorial container & live timer)
+   ========================================================================== */
+.fest-countdown-container {
+  margin-top: clamp(32px, 4.5vw, 52px);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(26px, 3.8vw, 38px) clamp(20px, 4vw, 44px);
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(8, 8, 8, 0.08);
+  border-radius: 18px;
+  max-width: 660px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03);
+  backdrop-filter: blur(10px);
 }
 
-.fest-editorial-roadmap-btn {
+.fest-countdown-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: clamp(14px, 2.2vw, 20px);
+  padding: 4px 14px;
+  background: rgba(8, 8, 8, 0.05);
+  border-radius: 999px;
+}
+
+.fest-countdown-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-orange);
+  box-shadow: 0 0 8px var(--color-orange);
+  animation: countdownDotBlink 2s ease-in-out infinite;
+}
+
+@keyframes countdownDotBlink {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+}
+
+.fest-countdown-meta {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-black);
+}
+
+.fest-countdown-tz {
+  font-family: var(--font-body);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(8, 8, 8, 0.45);
+  border-left: 1px solid rgba(8, 8, 8, 0.2);
+  padding-left: 8px;
+}
+
+.fest-countdown-units {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 2.2vw, 22px);
+}
+
+.fest-countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: clamp(56px, 11vw, 84px);
+}
+
+.fest-countdown-value {
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 5.2vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--color-black);
+  font-variant-numeric: tabular-nums;
+}
+
+.fest-countdown-label {
+  font-family: var(--font-body);
+  font-size: clamp(0.58rem, 0.8vw, 0.68rem);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(8, 8, 8, 0.5);
+  margin-top: 6px;
+}
+
+.fest-countdown-sep {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4.2vw, 2.8rem);
+  font-weight: 900;
+  color: var(--color-orange);
+  line-height: 1;
+  margin-bottom: 20px;
+  user-select: none;
+  animation: countdownSepPulse 2s ease-in-out infinite;
+}
+
+@keyframes countdownSepPulse {
+  0%, 100% {
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.fest-countdown-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: clamp(16px, 2.2vw, 22px);
+  padding-top: clamp(12px, 1.8vw, 16px);
+  border-top: 1px solid rgba(8, 8, 8, 0.08);
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(8, 8, 8, 0.65);
+  flex-wrap: wrap;
+}
+
+.fest-countdown-footer-sep {
+  color: var(--color-orange);
+  font-size: 0.65rem;
+}
+
+/* ==========================================================================
+   FLOATING VIEW ROADMAP BUTTON (Centered, subtle entrance & heartbeat pulse)
+   ========================================================================== */
+@keyframes floatRoadmapEnter {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 28px) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+@keyframes floatRoadmapPulse {
+  0%, 72%, 100% {
+    transform: translate(-50%, 0) scale(1);
+    box-shadow: 0 8px 26px rgba(255, 59, 22, 0.42), 0 2px 8px rgba(0, 0, 0, 0.28);
+  }
+  80% {
+    transform: translate(-50%, 0) scale(1.045);
+    box-shadow: 0 12px 34px rgba(255, 59, 22, 0.68), 0 0 0 4px rgba(255, 59, 22, 0.22);
+  }
+  88% {
+    transform: translate(-50%, 0) scale(1.01);
+    box-shadow: 0 9px 28px rgba(255, 59, 22, 0.48), 0 2px 8px rgba(0, 0, 0, 0.28);
+  }
+}
+
+.fest-floating-roadmap-btn {
+  position: fixed;
+  bottom: max(24px, calc(env(safe-area-inset-bottom, 0px) + 20px));
+  left: 50%;
+  transform: translate(-50%, 0) scale(1);
+  z-index: 100;
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  padding: 12px 30px;
+  padding: 13px 28px;
   background: var(--color-orange);
   color: #ffffff;
   border: none;
@@ -6787,25 +6960,62 @@ img, video {
   font-family: var(--font-display);
   font-size: 0.82rem;
   font-weight: 900;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(255, 59, 22, 0.28);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  box-shadow: 0 8px 26px rgba(255, 59, 22, 0.42), 0 2px 8px rgba(0, 0, 0, 0.28);
+  animation: floatRoadmapEnter 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards, floatRoadmapPulse 4.5s cubic-bezier(0.16, 1, 0.3, 1) 1.2s infinite;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, box-shadow 0.2s ease, visibility 0.35s;
 }
 
-.fest-editorial-roadmap-btn:hover {
-  background: #e03210;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(255, 59, 22, 0.38);
+.fest-floating-roadmap-btn:hover {
+  background: #ff4d29;
+  transform: translate(-50%, -2px) scale(1.025);
+  box-shadow: 0 12px 36px rgba(255, 59, 22, 0.58), 0 4px 12px rgba(0, 0, 0, 0.32);
 }
 
-.fest-editorial-roadmap-btn svg {
-  transition: transform 0.25s ease;
-}
-
-.fest-editorial-roadmap-btn:hover svg {
+.fest-floating-roadmap-btn:hover .fest-floating-roadmap-btn__icon {
   transform: translateY(2px);
+}
+
+.fest-floating-roadmap-btn:active {
+  transform: translate(-50%, 0) scale(0.98);
+}
+
+.fest-floating-roadmap-btn__text {
+  display: inline-block;
+  line-height: 1;
+}
+
+.fest-floating-roadmap-btn__icon {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Auto-hidden state when #roadmap is visible in viewport */
+.fest-floating-roadmap-btn.fest-floating-roadmap--hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translate(-50%, 20px) scale(0.94) !important;
+  animation: none !important;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .fest-floating-roadmap-btn {
+    animation: none !important;
+    transition: opacity 0.2s ease !important;
+    transform: translate(-50%, 0) !important;
+  }
+  .fest-floating-roadmap-btn.fest-floating-roadmap--hidden {
+    opacity: 0 !important;
+    transform: translate(-50%, 0) !important;
+  }
+  .fest-countdown-live-dot,
+  .fest-countdown-sep {
+    animation: none !important;
+  }
 }
 
 @media (max-width: 960px) {
@@ -6843,13 +7053,52 @@ img, video {
     font-size: 0.7rem;
     justify-content: center;
   }
-  .fest-editorial-roadmap-cue {
+  .fest-countdown-container {
+    padding: 22px 14px 18px;
     margin-top: 28px;
-  }
-  .fest-editorial-roadmap-btn {
+    border-radius: 14px;
     width: 100%;
-    max-width: 280px;
-    justify-content: center;
+  }
+  .fest-countdown-eyebrow {
+    margin-bottom: 14px;
+    padding: 3px 10px;
+  }
+  .fest-countdown-meta {
+    font-size: 0.62rem;
+  }
+  .fest-countdown-tz {
+    font-size: 0.58rem;
+    padding-left: 6px;
+  }
+  .fest-countdown-units {
+    gap: 6px;
+  }
+  .fest-countdown-unit {
+    min-width: 48px;
+  }
+  .fest-countdown-value {
+    font-size: 1.85rem;
+  }
+  .fest-countdown-label {
+    font-size: 0.54rem;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+  .fest-countdown-sep {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+  }
+  .fest-countdown-footer {
+    font-size: 0.64rem;
+    gap: 5px;
+    margin-top: 14px;
+    padding-top: 10px;
+  }
+  .fest-floating-roadmap-btn {
+    bottom: max(18px, calc(env(safe-area-inset-bottom, 0px) + 14px));
+    padding: 11px 22px;
+    font-size: 0.74rem;
+    gap: 7px;
   }
 }
 
