@@ -41,7 +41,7 @@ PlusNine/
 │       └── logo_oliseh.png      # Primary logo emblem
 └── src/
     ├── main.tsx                 # Application entry point
-    ├── App.tsx                  # Root orchestrator & hash router
+    ├── App.tsx                  # Root orchestrator & HTML5 History router (clean path routes)
     ├── styles/
     │   ├── tokens.css           # Color tokens (#080808, #f1f0eb, #ff3b16), typography
     │   └── main.css             # Main stylesheet, editorial moments & responsive rules
